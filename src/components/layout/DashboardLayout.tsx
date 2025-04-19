@@ -1,31 +1,28 @@
 
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
+import Header from './Header';
 
 const DashboardLayout = () => {
   
 
   return (
-   <>
-  
-     <div className="flex">
+    <>
+      <div className="flex">
         {/* sidebar left-side */}
-        <div className="sidebar w-[250px] bg-green-500">
-          <Sidebar/>
+        <div className="sidebar w-[250px]">
+          <Sidebar />
         </div>
         {/* right-side */}
         <div className="flex-1">
-           {/* header part */}
-           <div className="h-[90px] bg-pink-400">
-             This is Header
-           </div>
-           {/* content */}
-           <div className="h-[calc(100vh-90px)] overflow-auto bg-purple-400">
-              <Outlet/>
-           </div>
+          <Header/>
+          {/* content */}
+          <div className="h-[calc(100vh-85px)] overflow-auto bg-[#E6E4E0] p-4">
+              <Outlet />
+          </div>
         </div>
-     </div>
-   </>
+      </div>
+    </>
   );
 };
 

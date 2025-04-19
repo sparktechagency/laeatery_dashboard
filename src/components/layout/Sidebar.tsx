@@ -26,7 +26,7 @@ const Sidebar = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        boxShadow: '2px 0 8px rgba(0, 0, 0, 0.05)',
+        // boxShadow: '2px 0 8px rgba(0, 0, 0, 0.05)',
       }}
     >
    

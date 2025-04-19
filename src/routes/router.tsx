@@ -10,6 +10,7 @@ import FaqsPage from "../pages/FaqsPage";
 import TermsPage from "../pages/TermsPage";
 import PrivacyPolicyPage from "../pages/PrivacyPolicyPage";
 import ProfilePage from "../pages/ProfilePage";
+import AboutPage from "../pages/AboutPage";
 
 
 
@@ -59,6 +60,10 @@ import ProfilePage from "../pages/ProfilePage";
            {
             path: "privacy-policy",
             element: <PrivacyPolicyPage />,
+           },
+           {
+            path: "about",
+            element: <AboutPage />,
            },
          ],
        },
