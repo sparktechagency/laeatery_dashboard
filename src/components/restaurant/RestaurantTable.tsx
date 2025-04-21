@@ -1,8 +1,9 @@
 import { Table } from "antd";
 import { IUser } from "../../types/user.type";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoEyeSharp } from "react-icons/io5";
 import EditRestaurantModal from "../modal/restaurant/EditRestaurantModal";
+import DeleteRestaurantModal from "../modal/restaurant/DeleteRestaurantModal";
+import ViewRestaurantModal from "../modal/restaurant/ViewRestaurantModal";
 
 type TProps = {
     restaurants: IUser[];
@@ -45,9 +46,7 @@ const RestaurantTable = ({ restaurants }: TProps) => {
       key: "details",
       render: (_, record) => (
         <>
-          <button className="bg-black hover:bg-primary p-1.5 text-white rounded-md">
-            <IoEyeSharp size={18} />
-          </button>
+          <ViewRestaurantModal/>
         </>
       ),
     },
@@ -58,9 +57,7 @@ const RestaurantTable = ({ restaurants }: TProps) => {
         <>
           <div className="flex gap-x-3">
             <EditRestaurantModal/>
-            <button className="bg-secondary hover:bg-red-600 p-1.5 text-white rounded-md">
-              <RiDeleteBin6Line size={18} />
-            </button>
+            <DeleteRestaurantModal restaurantId={record?._id}/>
           </div>
         </>
       ),
