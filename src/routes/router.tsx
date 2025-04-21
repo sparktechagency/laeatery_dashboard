@@ -11,64 +11,61 @@ import TermsPage from "../pages/TermsPage";
 import PrivacyPolicyPage from "../pages/PrivacyPolicyPage";
 import ProfilePage from "../pages/ProfilePage";
 import AboutPage from "../pages/AboutPage";
-import CreateRestaurantModal from "../components/modal/CreateRestaurantModal";
+import CreateRestaurantModal from "../components/modal/restaurant/CreateRestaurantModal";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <DashboardLayout />,
+    // loader: rootLoader,
+    children: [
+      {
+        index: true,
+        element: <DashboardPage />,
+      },
+      {
+        path: "users",
+        element: <UsersPage />,
+      },
+      {
+        path: "restaurants",
+        element: <RestaurantsPage />,
+        // loader: teamLoader,
+      },
+      {
+        path: "vibe",
+        element: <VibePage />,
+      },
+      {
+        path: "cuisine",
+        element: <CusinePage />,
+      },
+      {
+        path: "help",
+        element: <HelpPage />,
+      },
+      {
+        path: "faqs",
+        element: <FaqsPage />,
+      },
+      {
+        path: "profile",
+        element: <ProfilePage />,
+      },
+      {
+        path: "terms",
+        element: <TermsPage />,
+      },
+      {
+        path: "privacy-policy",
+        element: <PrivacyPolicyPage />,
+      },
+      {
+        path: "about",
+        element: <AboutPage />,
+      },
+    ],
+  },
+]);
 
-
-     const router = createBrowserRouter([
-       {
-         path: "/",
-         element: <DashboardLayout />,
-         // loader: rootLoader,
-         children: [
-            {
-                index: true,
-                element: <DashboardPage/>
-            },
-           {
-             path: "users",
-             element: <UsersPage />,
-           },
-           {
-            path: "restaurants",
-            element: <RestaurantsPage />,
-            // loader: teamLoader,
-           },
-           {
-            path: "vibe",
-            element: <VibePage />,
-           },
-           {
-            path: "cuisine",
-            element: <CusinePage />,
-           },
-           {
-            path: "help",
-            element: <HelpPage />,
-           },
-           {
-            path: "faqs",
-            element: <FaqsPage />,
-           },
-           {
-            path: "profile",
-            element: <ProfilePage />,
-           },
-           {
-            path: "terms",
-            element: <TermsPage />,
-           },
-           {
-            path: "privacy-policy",
-            element: <PrivacyPolicyPage />,
-           },
-           {
-            path: "about",
-            element: <AboutPage />,
-           },
-         ],
-       },
-     ]);
-
-
-     export default router;
+export default router;

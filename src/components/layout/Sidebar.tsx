@@ -50,7 +50,7 @@ const Sidebar = () => {
       {/* Fixed Logout Button */}
       <div className="px-4 py-3 w-full absolute bottom-10">
         <div className='flex items-center gap-3 px-3 py-2 rounded cursor-pointer hover:bg-gray-100 text-primary font-medium'>
-         <TbLogout className="text-lg"/> <span className='text-base'>
+         <TbLogout className="text-lg"/> <span className='text-lg'>
          Logout
          </span>
         </div>

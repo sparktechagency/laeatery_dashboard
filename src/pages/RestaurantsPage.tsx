@@ -1,111 +1,114 @@
 import { FaArrowLeft, FaPlus, FaSearch } from "react-icons/fa";
 import { Pagination } from "antd";
-import type { PaginationProps } from 'antd';
+import type { PaginationProps } from "antd";
 import RestaurantTable from "../components/restaurant/RestaurantTable";
 import { useNavigate } from "react-router-dom";
-import CreateRestaurantModal from "../components/modal/CreateRestaurantModal";
+import CreateRestaurantModal from "../components/modal/restaurant/CreateRestaurantModal";
 
 const RestaurantsPage = () => {
   const navigate = useNavigate();
   const handleGoBack = () => {
-    navigate(-1); 
+    navigate(-1);
   };
 
-  // getUsers 
+  // getUsers
   const restaurants = [
     {
-      "slNo": 1,
-      "name": "Spice Garden",
-      "cuisine": "Indian",
-      "email": "contact@spicegarden.com",
-      "address": "123 Curry Lane, New York, NY",
-      "website": "https://spicegarden.com"
+      slNo: 1,
+      name: "Spice Garden",
+      cuisine: "Indian",
+      email: "contact@spicegarden.com",
+      address: "123 Curry Lane, New York, NY",
+      website: "https://spicegarden.com",
     },
     {
-      "slNo": 2,
-      "name": "Pasta Palace",
-      "cuisine": "Italian",
-      "email": "info@pastapalace.it",
-      "address": "456 Olive Street, Chicago, IL",
-      "website": "https://pastapalace.it"
+      slNo: 2,
+      name: "Pasta Palace",
+      cuisine: "Italian",
+      email: "info@pastapalace.it",
+      address: "456 Olive Street, Chicago, IL",
+      website: "https://pastapalace.it",
     },
     {
-      "slNo": 3,
-      "name": "Sushi World",
-      "cuisine": "Japanese",
-      "email": "hello@sushiworld.jp",
-      "address": "789 Sakura Ave, San Francisco, CA",
-      "website": "https://sushiworld.jp"
+      slNo: 3,
+      name: "Sushi World",
+      cuisine: "Japanese",
+      email: "hello@sushiworld.jp",
+      address: "789 Sakura Ave, San Francisco, CA",
+      website: "https://sushiworld.jp",
     },
     {
-      "slNo": 4,
-      "name": "Taco Time",
-      "cuisine": "Mexican",
-      "email": "order@tacotime.mx",
-      "address": "321 Fiesta Blvd, Austin, TX",
-      "website": "https://tacotime.mx"
+      slNo: 4,
+      name: "Taco Time",
+      cuisine: "Mexican",
+      email: "order@tacotime.mx",
+      address: "321 Fiesta Blvd, Austin, TX",
+      website: "https://tacotime.mx",
     },
     {
-      "slNo": 5,
-      "name": "Burger Bros",
-      "cuisine": "American",
-      "email": "support@burgerbros.us",
-      "address": "654 Grill Rd, Seattle, WA",
-      "website": "https://burgerbros.us"
+      slNo: 5,
+      name: "Burger Bros",
+      cuisine: "American",
+      email: "support@burgerbros.us",
+      address: "654 Grill Rd, Seattle, WA",
+      website: "https://burgerbros.us",
     },
     {
-      "slNo": 6,
-      "name": "Dragon Noodles",
-      "cuisine": "Chinese",
-      "email": "info@dragonnoodles.cn",
-      "address": "987 Bamboo Way, Los Angeles, CA",
-      "website": "https://dragonnoodles.cn"
+      slNo: 6,
+      name: "Dragon Noodles",
+      cuisine: "Chinese",
+      email: "info@dragonnoodles.cn",
+      address: "987 Bamboo Way, Los Angeles, CA",
+      website: "https://dragonnoodles.cn",
     },
     {
-      "slNo": 7,
-      "name": "Le Baguette",
-      "cuisine": "French",
-      "email": "bonjour@lebaguette.fr",
-      "address": "159 Rue de Paris, Miami, FL",
-      "website": "https://lebaguette.fr"
+      slNo: 7,
+      name: "Le Baguette",
+      cuisine: "French",
+      email: "bonjour@lebaguette.fr",
+      address: "159 Rue de Paris, Miami, FL",
+      website: "https://lebaguette.fr",
     },
     {
-      "slNo": 8,
-      "name": "The Greek Table",
-      "cuisine": "Greek",
-      "email": "contact@greektable.gr",
-      "address": "753 Athena St, Denver, CO",
-      "website": "https://greektable.gr"
+      slNo: 8,
+      name: "The Greek Table",
+      cuisine: "Greek",
+      email: "contact@greektable.gr",
+      address: "753 Athena St, Denver, CO",
+      website: "https://greektable.gr",
     },
     {
-      "slNo": 9,
-      "name": "Falafel House",
-      "cuisine": "Middle Eastern",
-      "email": "info@falafelhouse.me",
-      "address": "852 Desert Rd, Phoenix, AZ",
-      "website": "https://falafelhouse.me"
+      slNo: 9,
+      name: "Falafel House",
+      cuisine: "Middle Eastern",
+      email: "info@falafelhouse.me",
+      address: "852 Desert Rd, Phoenix, AZ",
+      website: "https://falafelhouse.me",
     },
     {
-      "slNo": 10,
-      "name": "K-Town Grill",
-      "cuisine": "Korean",
-      "email": "hello@ktowngrill.kr",
-      "address": "963 Seoul St, Atlanta, GA",
-      "website": "https://ktowngrill.kr"
-    }
-  ]
-  
+      slNo: 10,
+      name: "K-Town Grill",
+      cuisine: "Korean",
+      email: "hello@ktowngrill.kr",
+      address: "963 Seoul St, Atlanta, GA",
+      website: "https://ktowngrill.kr",
+    },
+  ];
 
-  const itemRender: PaginationProps['itemRender'] = (_, type, originalElement) => {
-    if (type === 'prev') {
+  const itemRender: PaginationProps["itemRender"] = (
+    _,
+    type,
+    originalElement
+  ) => {
+    if (type === "prev") {
       return <a>Previous</a>;
     }
-    if (type === 'next') {
+    if (type === "next") {
       return <a>Next</a>;
     }
     return originalElement;
   };
-  
+
   return (
     <>
       <section className="bg-white rounded-lg">
@@ -133,19 +136,19 @@ const RestaurantsPage = () => {
               />
             </div>
             {/* Add button */}
-            <CreateRestaurantModal/>
+            <CreateRestaurantModal />
           </div>
         </div>
 
-        {/* <div>
+        <div>
           <RestaurantTable restaurants={restaurants} />
           <div className="flex justify-center items-center p-4">
             <Pagination total={20} itemRender={itemRender} />
           </div>
-        </div> */}
+        </div>
       </section>
     </>
   );
-}
+};
 
-export default RestaurantsPage
+export default RestaurantsPage;
