@@ -3,6 +3,7 @@ import { Pagination } from "antd";
 import type { PaginationProps } from 'antd';
 import { useNavigate } from "react-router-dom";
 import CuisineTable from "../components/cuisine/CuisineTable";
+import CreateCuisineModal from "../components/modal/cuisine/CreateCuisineModal";
 
 const CusinePage = () => {
   const navigate = useNavigate();
@@ -103,10 +104,7 @@ const CusinePage = () => {
               />
             </div>
             {/* Add button */}
-            <button className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-primary transition">
-              <FaPlus />
-              Add New
-            </button>
+            <CreateCuisineModal/>
           </div>
         </div>
 

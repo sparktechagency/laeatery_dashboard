@@ -1,6 +1,5 @@
 import { Layout} from 'antd';
 import Logo from '../../assets/images/logo.png';
-
 import MenuItem from './MenuItem';
 import { menuItems } from '../../data/data';
 import { TbLogout } from 'react-icons/tb';

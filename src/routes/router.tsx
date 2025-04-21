@@ -11,7 +11,8 @@ import TermsPage from "../pages/TermsPage";
 import PrivacyPolicyPage from "../pages/PrivacyPolicyPage";
 import ProfilePage from "../pages/ProfilePage";
 import AboutPage from "../pages/AboutPage";
-import CreateRestaurantModal from "../components/modal/restaurant/CreateRestaurantModal";
+import ResetPasswordPage from "../pages/auth/ResetPasswordPage";
+import VerifyOtpPage from "../pages/auth/VerifyOtpPage";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,14 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/verify-otp",
+    element: <VerifyOtpPage/>
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPasswordPage/>
+  }
 ]);
 
 export default router;
