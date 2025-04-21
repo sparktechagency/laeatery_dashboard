@@ -103,7 +103,7 @@ const TopRestaurantTable = () => {
           columns={columns}
           dataSource={restaurants}
           pagination={false}
-          scroll={{ x: true, y: "60vh" }}
+          scroll={{ x: true}}
         />
 
     </>

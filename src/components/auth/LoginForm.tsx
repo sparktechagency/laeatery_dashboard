@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -6,13 +6,14 @@ const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
+    const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
       navigate("/")
     }
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
          {/* Email Input */}
        <div className="text-left mb-4">
           <label className="text-sm font-medium text-gray-700 mb-1 block">Email address</label>

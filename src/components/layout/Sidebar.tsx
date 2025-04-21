@@ -3,10 +3,12 @@ import Logo from '../../assets/images/logo.png';
 import MenuItem from './MenuItem';
 import { menuItems } from '../../data/data';
 import { TbLogout } from 'react-icons/tb';
+import { useNavigate } from 'react-router-dom';
 const { Sider } = Layout;
 
 
 const Sidebar = () => {
+  const navigate = useNavigate()
 
   return (
     <>
@@ -27,8 +29,8 @@ const Sidebar = () => {
 
       <div className="flex flex-col flex-1 overflow-y-auto "> 
         {/* Logo */}
-        <div className="flex items-center justify-center h-[85px]">
-          <img src={Logo} alt="Logo" className="h-16 object-contain" />
+        <div  className="flex items-center justify-center h-[85px]">
+          <img onClick={()=> navigate("/")} src={Logo} alt="Logo" className="h-16 object-contain cursor-pointer" />
         </div> 
 
         {/* Menu Items */}
