@@ -6,6 +6,7 @@ import {
     LineChartOutlined,
     TagsOutlined,
     CustomerServiceOutlined,
+    SettingOutlined
   } from '@ant-design/icons';
 
 export const menuItems = [
@@ -25,7 +26,7 @@ export const menuItems = [
         ],
     },
     {
-      icon: CustomerServiceOutlined,
+      icon: SettingOutlined,
       label: 'Settings',
       hasArrow: true,
       children: [

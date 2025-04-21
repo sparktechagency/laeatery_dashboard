@@ -11,6 +11,7 @@ import TermsPage from "../pages/TermsPage";
 import PrivacyPolicyPage from "../pages/PrivacyPolicyPage";
 import ProfilePage from "../pages/ProfilePage";
 import AboutPage from "../pages/AboutPage";
+import CreateRestaurantModal from "../components/modal/CreateRestaurantModal";
 
 
 

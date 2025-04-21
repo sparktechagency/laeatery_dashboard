@@ -3,6 +3,7 @@ import { Pagination } from "antd";
 import type { PaginationProps } from 'antd';
 import RestaurantTable from "../components/restaurant/RestaurantTable";
 import { useNavigate } from "react-router-dom";
+import CreateRestaurantModal from "../components/modal/CreateRestaurantModal";
 
 const RestaurantsPage = () => {
   const navigate = useNavigate();
@@ -132,19 +133,16 @@ const RestaurantsPage = () => {
               />
             </div>
             {/* Add button */}
-            <button className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-primary transition">
-              <FaPlus />
-              Add New
-            </button>
+            <CreateRestaurantModal/>
           </div>
         </div>
 
-        <div>
+        {/* <div>
           <RestaurantTable restaurants={restaurants} />
           <div className="flex justify-center items-center p-4">
             <Pagination total={20} itemRender={itemRender} />
           </div>
-        </div>
+        </div> */}
       </section>
     </>
   );
