@@ -1,12 +1,19 @@
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <header className="w-full flex justify-end items-center h-[85px] bg-white pr-12">
         <div className="flex items-center gap-4">
-          <button onClick={()=>navigate("/notifications")} className="bg-gray-100 p-2 rounded-full hover:bg-gray-200">
+          <button
+            onClick={() => navigate("/notifications")}
+            className="bg-gray-100 p-2 rounded-full hover:bg-gray-200 relative"
+          >
+            {/* Notification Badge */}
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+              3
+            </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 text-gray-600"
@@ -22,7 +29,10 @@ const Header = () => {
               />
             </svg>
           </button>
-          <div onClick={()=> navigate("/profile")} className="flex items-center gap-2 cursor-pointer">
+          <div
+            onClick={() => navigate("/profile")}
+            className="flex items-center gap-2 cursor-pointer"
+          >
             <img
               src="https://i.pravatar.cc/40?img=3"
               alt="Profile"
@@ -34,6 +44,6 @@ const Header = () => {
       </header>
     </>
   );
-}
+};
 
-export default Header
+export default Header;

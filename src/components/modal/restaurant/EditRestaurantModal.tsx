@@ -8,7 +8,10 @@ const EditRestaurantModal = () => {
 
   return (
     <>
-      <button onClick={() => setModalOpen(true)} className="bg-edit hover:bg-blue-600 p-1.5 text-white rounded-md">
+      <button
+        onClick={() => setModalOpen(true)}
+        className="bg-edit hover:bg-blue-600 p-1.5 text-white rounded-md"
+      >
         <MdOutlineModeEdit size={18} />
       </button>
       <Modal
@@ -23,12 +26,15 @@ const EditRestaurantModal = () => {
           </h2>
 
           {/* Cover Photo */}
-          <div className="mb-4">
-            <label className="block text-sm mb-1">Cover Photo</label>
-            <div className="border-2 border-dashed rounded-lg p-4 flex justify-center items-center cursor-pointer border-gray-500">
-              <TbCameraPlus className="mr-2 text-gray-500" />
-              <span className="text-gray-600 font-medium">Add</span>
-            </div>
+          <div>
+            <label className="block text-sm mb-1" htmlFor="file">
+              Cover Photo
+              <input type="file" style={{ display: "none" }} id="file" />
+              <div className="border-2 border-dashed rounded-lg mt-1 p-4 flex justify-center items-center cursor-pointer border-gray-500">
+                <TbCameraPlus className="mr-2" />
+                <span className="text-gray-600 font-medium">Add</span>
+              </div>
+            </label>
           </div>
           <div>
             <label className="block text-sm mb-1">Restaurant Name</label>
@@ -131,11 +137,14 @@ const EditRestaurantModal = () => {
           </div>
           {/* Gallery Photo */}
           <div>
-            <label className="block text-sm mb-1">Gallery Photo</label>
-            <div className="border-2 border-dashed rounded-lg p-4 flex justify-center items-center cursor-pointer border-gray-500">
-              <TbCameraPlus className="mr-2" />
-              <span className="text-gray-600 font-medium">Add</span>
-            </div>
+            <label className="block text-sm mb-1" htmlFor="file">
+              Gallery Photo
+              <input type="file" style={{ display: "none" }} id="file" />
+              <div className="border-2 border-dashed rounded-lg mt-1 p-4 flex justify-center items-center cursor-pointer border-gray-500">
+                <TbCameraPlus className="mr-2" />
+                <span className="text-gray-600 font-medium">Add</span>
+              </div>
+            </label>
           </div>
 
           {/* Buttons */}

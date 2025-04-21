@@ -35,11 +35,14 @@ const CreateVibeModal = () => {
         
           {/* Gallery Photo */}
           <div>
-            <label className="block text-sm mb-1">Add Icon</label>
-            <div className="border-2 border-dashed rounded-lg p-4 flex justify-center items-center cursor-pointer border-gray-500">
-              <TbCameraPlus className="mr-2" />
-              <span className="text-gray-600 font-medium">Add</span>
-            </div>
+            <label className="block text-sm mb-1.5" htmlFor="file">
+              Add Icon
+              <input type="file" style={{ display: "none" }} id="file" />
+              <div className="border-2 border-dashed rounded-lg p-4 mt-1 flex justify-center items-center cursor-pointer border-gray-500">
+                <TbCameraPlus className="mr-2" />
+                <span className="text-gray-600 font-medium">Add</span>
+              </div>
+            </label>
           </div>
 
           {/* Buttons */}
