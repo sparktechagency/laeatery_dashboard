@@ -1,6 +1,5 @@
 import { Table } from "antd";
 import { IUser } from "../../types/user.type";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import profile_img from "../../assets/images/user1.png";
 import profile_placeholder from "../../assets/images/profile_placeholder.png";
 import EditCuisineModal from "../modal/cuisine/EditCuisineModal";

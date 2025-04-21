@@ -8,10 +8,6 @@ const { Sider } = Layout;
 
 const Sidebar = () => {
 
-
-
- 
-
   return (
     <>
     <Sider
@@ -25,12 +21,10 @@ const Sidebar = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        // boxShadow: '2px 0 8px rgba(0, 0, 0, 0.05)',
       }}
     >
    
 
-     {/* /*Scrollable Content Section */ }
       <div className="flex flex-col flex-1 overflow-y-auto "> 
         {/* Logo */}
         <div className="flex items-center justify-center h-[80px]">
@@ -49,7 +43,7 @@ const Sidebar = () => {
       {/* Fixed Logout Button */}
       <div className="px-4 py-3 w-full absolute bottom-10">
         <div className='flex items-center gap-3 px-3 py-2 rounded cursor-pointer hover:bg-gray-100 text-primary font-medium'>
-         <TbLogout className="text-lg"/> <span className='text-lg'>
+         <TbLogout className="text-[20px]"/> <span className='text-lg'>
          Logout
          </span>
         </div>
