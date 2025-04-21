@@ -6,7 +6,7 @@ const Header = () => {
     <>
       <header className="w-full flex justify-end items-center h-[85px] bg-white pr-12">
         <div className="flex items-center gap-4">
-          <button className="bg-gray-100 p-2 rounded-full hover:bg-gray-200">
+          <button onClick={()=>navigate("/notifications")} className="bg-gray-100 p-2 rounded-full hover:bg-gray-200">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 text-gray-600"

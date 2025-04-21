@@ -1,23 +1,29 @@
 import { Tabs } from "antd";
-import { FaCamera } from "react-icons/fa";
+import { FaArrowLeft, FaCamera } from "react-icons/fa";
 import EditProfile from "../components/profile/EditProfile";
 import ChangePasswordForm from "../components/profile/ChangePasswordForm";
 import { useState } from "react";
 import profile_img from "../assets/images/profile_placeholder.png";
+import { useNavigate } from "react-router-dom";
 
 
 const { TabPane } = Tabs;
 
 const ProfilePage = () => {
+  const navigate = useNavigate();
   const [isProfile, setIsProfile] = useState(true);
   const onChange = (key: any) => {
     setIsProfile(!isProfile);
   };
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
  
   return (
     <div className="min-h-full flex flex-col bg-gray-50 p-4">
-      <div className="text-left mb-6 cursor-pointer text-gray-500">
-        ← Profile
+      <div className="text-left mb-6 text-fieldColor text-lg font-semibold flex items-center gap-2">
+         <FaArrowLeft onClick={handleGoBack} size={20} className="cursor-pointer" /> Profile
       </div>
 
        {/* Main Part */}
