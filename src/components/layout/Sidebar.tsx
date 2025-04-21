@@ -27,7 +27,7 @@ const Sidebar = () => {
 
       <div className="flex flex-col flex-1 overflow-y-auto "> 
         {/* Logo */}
-        <div className="flex items-center justify-center h-[80px]">
+        <div className="flex items-center justify-center h-[85px]">
           <img src={Logo} alt="Logo" className="h-16 object-contain" />
         </div> 
 

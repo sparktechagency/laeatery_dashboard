@@ -13,6 +13,8 @@ import ProfilePage from "../pages/ProfilePage";
 import AboutPage from "../pages/AboutPage";
 import ResetPasswordPage from "../pages/auth/ResetPasswordPage";
 import VerifyOtpPage from "../pages/auth/VerifyOtpPage";
+import LoginPage from "../pages/auth/LoginPage";
+import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +68,14 @@ const router = createBrowserRouter([
         element: <AboutPage />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <LoginPage/>
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPasswordPage/>
   },
   {
     path: "/verify-otp",

@@ -18,7 +18,7 @@ const ProfileSettings = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 flex flex-col items-center">
+    <div className="min-h-full bg-gray-50 p-4 flex flex-col items-center">
       <div className="w-full max-w-xl bg-white p-6 rounded-2xl shadow-md">
         <div className="text-left mb-6 cursor-pointer text-gray-500">← Profile</div>
         <div className="flex flex-col items-center">

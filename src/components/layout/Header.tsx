@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate()
   return (
     <>
       <header className="w-full flex justify-end items-center h-[85px] bg-white pr-12">
@@ -20,7 +22,7 @@ const Header = () => {
               />
             </svg>
           </button>
-          <div className="flex items-center gap-2">
+          <div onClick={()=> navigate("/profile")} className="flex items-center gap-2 cursor-pointer">
             <img
               src="https://i.pravatar.cc/40?img=3"
               alt="Profile"

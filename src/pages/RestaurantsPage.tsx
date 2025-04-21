@@ -11,7 +11,7 @@ const RestaurantsPage = () => {
     navigate(-1);
   };
 
-  // getUsers
+  // getRestaurants
   const restaurants = [
     {
       slNo: 1,
@@ -111,7 +111,7 @@ const RestaurantsPage = () => {
 
   return (
     <>
-      <section className="bg-white rounded-lg">
+      <section className="bg-white rounded-lg min-h-full">
         <div className="flex justify-between items-center h-[74px] px-6 py-4 shadow">
           {/* Left side - Back icon and title */}
           <div className="flex items-center space-x-4">
