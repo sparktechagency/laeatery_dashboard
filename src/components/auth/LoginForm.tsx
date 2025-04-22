@@ -8,7 +8,6 @@ const LoginForm = () => {
 
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      navigate("/")
     }
 
   return (
