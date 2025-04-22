@@ -32,14 +32,17 @@ const CreateCuisineModal = () => {
               className="w-full border border-gray-600 focus:outline-none focus:border-blue-500 rounded-md px-3 py-2"
             />
           </div>
-        
+
           {/* Gallery Photo */}
           <div>
-            <label className="block text-sm mb-1">Add Icon</label>
-            <div className="border-2 border-dashed rounded-lg p-4 flex justify-center items-center cursor-pointer border-gray-500">
-              <TbCameraPlus className="mr-2" />
-              <span className="text-gray-600 font-medium">Add</span>
-            </div>
+            <label className="block text-sm mb-1" htmlFor="file">
+              Add Icon
+              <input type="file" style={{ display: "none" }} id="file" />
+              <div className="border-2 border-dashed rounded-lg mt-1 p-4 flex justify-center items-center cursor-pointer border-gray-500">
+                <TbCameraPlus className="mr-2" />
+                <span className="text-gray-600 font-medium">Add</span>
+              </div>
+            </label>
           </div>
 
           {/* Buttons */}

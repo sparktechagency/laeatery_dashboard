@@ -3,6 +3,7 @@ import { IUser } from "../../types/user.type";
 import { MdBlockFlipped } from "react-icons/md";
 import profile_img from "../../assets/images/user1.png";
 import profile_placeholder from "../../assets/images/profile_placeholder.png";
+import ChangeStatusModal from "../modal/auth/ChangeStatusModal";
 
 type TProps = {
   users: IUser[];
@@ -50,16 +51,40 @@ const UserTable = ({ users }: TProps) => {
       key: "address",
     },
     {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <>
-          <button className="bg-secondary hover:bg-red-600 p-1.5 text-white rounded-md">
-            <MdBlockFlipped size={18} />
-          </button>
-        </>
-      ),
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (val, record) => {
+        const statusStyles = {
+          blocked: "bg-red-100 text-red-700 border border-red-300",
+          unblocked: "bg-green-100 text-green-700 border border-green-300",
+        };
+        const bgColor =
+          val === "blocked" ? statusStyles.blocked : statusStyles.unblocked;
+    
+        return (
+          <div className="flex items-center gap-2">
+            <span
+              className={`${bgColor} px-3 py-0.5 text-sm font-medium rounded-full`}
+            >
+              {val}
+            </span>
+            <ChangeStatusModal userId={record._id} status={val}/>
+          </div>
+        );
+      }
     },
+    // {
+    //   title: "Action",
+    //   key: "action",
+    //   render: (_, record) => (
+    //     <>
+    //       <button className="bg-secondary hover:bg-red-600 p-1.5 text-white rounded-md">
+    //         <MdBlockFlipped size={18} />
+    //       </button>
+    //     </>
+    //   ),
+    // },
   ];
 
 

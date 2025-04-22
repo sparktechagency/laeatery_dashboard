@@ -1,18 +1,17 @@
 import { Modal } from "antd";
 import { useState } from "react";
-import { MdOutlineModeEdit } from "react-icons/md";
-import { TbCameraPlus } from "react-icons/tb";
+import { FiEdit } from "react-icons/fi";
 
-const EditCuisineModal = () => {
+const EditFaqModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <>
       <button
         onClick={() => setModalOpen(true)}
-        className="bg-edit hover:bg-blue-600 p-1.5 text-white rounded-md"
+        className="bg-white p-1.5 rounded-full shadow hover:bg-gray-100 transition"
       >
-        <MdOutlineModeEdit size={18} />
+        <FiEdit className="text-blue-600" size={20} />
       </button>
       <Modal
         open={modalOpen}
@@ -21,27 +20,23 @@ const EditCuisineModal = () => {
         footer={false}
       >
         <div className="space-y-4 pt-5">
-          <h2 className="text-xl font-semibold mb-4 text-center">Update Cuisine</h2>
+          <h2 className="text-xl font-semibold mb-4 text-center">Update FAQ</h2>
 
           <div>
-            <label className="block text-sm mb-1">Cuisine Title</label>
-            <input
-              type="text"
-              placeholder="title"
+            <label className="block text-sm mb-1">Question</label>
+            <textarea
+              placeholder="write a question..."
+              rows={2}
               className="w-full border border-gray-600 focus:outline-none focus:border-blue-500 rounded-md px-3 py-2"
             />
           </div>
-
-          {/* Gallery Photo */}
           <div>
-            <label className="block text-sm mb-1" htmlFor="file">
-              Icon
-              <input type="file" style={{ display: "none" }} id="file" />
-              <div className="border-2 border-dashed rounded-lg mt-1 p-4 flex justify-center items-center cursor-pointer border-gray-500">
-                <TbCameraPlus className="mr-2" />
-                <span className="text-gray-600 font-medium">Add</span>
-              </div>
-            </label>
+            <label className="block text-sm mb-1">Answer</label>
+            <textarea
+              placeholder="write answer..."
+              rows={2}
+              className="w-full border border-gray-600 focus:outline-none focus:border-blue-500 rounded-md px-3 py-2"
+            />
           </div>
 
           {/* Buttons */}
@@ -62,4 +57,4 @@ const EditCuisineModal = () => {
   );
 };
 
-export default EditCuisineModal;
+export default EditFaqModal;

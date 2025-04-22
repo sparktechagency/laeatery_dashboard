@@ -1,7 +1,7 @@
 import { Table } from "antd";
 import { IUser } from "../../types/user.type";
 import profile_img from "../../assets/images/user1.png";
-import profile_placeholder from "../../assets/images/profile_placeholder.png";
+import icon from "../../assets/images/icon.png";
 import EditCuisineModal from "../modal/cuisine/EditCuisineModal";
 import DeleteCuisineModal from "../modal/cuisine/DeleteCuisineModal";
 
@@ -27,12 +27,12 @@ const CuisineTable = ({ cuisines }: TProps) => {
       key: "icon",
       render: (val, record) => (
           <img
-            src={record?.icon || profile_img}
+            src={record?.icon || icon}
             alt="profile"
-            className="w-12 h-12 rounded-lg"
+            className="w-12 h-12 rounded-full"
             onError={(e) => {
               e.currentTarget.onerror = null;
-              e.currentTarget.src = profile_placeholder;
+              e.currentTarget.src = icon;
             }}
           />
       ),

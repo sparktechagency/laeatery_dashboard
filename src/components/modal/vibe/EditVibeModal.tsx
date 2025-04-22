@@ -3,7 +3,7 @@ import { useState } from "react";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { TbCameraPlus } from "react-icons/tb";
 
-const EditCuisineModal = () => {
+const EditVibeModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -21,10 +21,10 @@ const EditCuisineModal = () => {
         footer={false}
       >
         <div className="space-y-4 pt-5">
-          <h2 className="text-xl font-semibold mb-4 text-center">Update Cuisine</h2>
+          <h2 className="text-xl font-semibold mb-4 text-center">Update Vibe</h2>
 
           <div>
-            <label className="block text-sm mb-1">Cuisine Title</label>
+            <label className="block text-sm mb-1">Vibe Title</label>
             <input
               type="text"
               placeholder="title"
@@ -34,8 +34,8 @@ const EditCuisineModal = () => {
 
           {/* Gallery Photo */}
           <div>
-            <label className="block text-sm mb-1" htmlFor="file">
-              Icon
+            <label className="block text-sm mb-1.5" htmlFor="file">
+              Update Icon
               <input type="file" style={{ display: "none" }} id="file" />
               <div className="border-2 border-dashed rounded-lg mt-1 p-4 flex justify-center items-center cursor-pointer border-gray-500">
                 <TbCameraPlus className="mr-2" />
@@ -62,4 +62,4 @@ const EditCuisineModal = () => {
   );
 };
 
-export default EditCuisineModal;
+export default EditVibeModal;

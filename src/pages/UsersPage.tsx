@@ -19,15 +19,16 @@ const UsersPage = () => {
       email: "ava.thompson@example.com",
       phone: "+1 555-123-4567",
       address: "123 Maple St, Austin, TX",
+      status: "unblocked"
     },
     {
       "SL No": 2,
       fullName: "Liam Walker",
-      // "image": "https://i.pravatar.cc/150?img=2",
       image: "gfg",
       email: "liam.walker@example.com",
       phone: "+1 555-234-5678",
       address: "456 Oak Ave, Denver, CO",
+      status: "blocked"
     },
     {
       "SL No": 3,
@@ -36,6 +37,7 @@ const UsersPage = () => {
       email: "emma.harris@example.com",
       phone: "+1 555-345-6789",
       address: "789 Pine Rd, Miami, FL",
+      status: "unblocked"
     },
     {
       "SL No": 4,
@@ -44,6 +46,7 @@ const UsersPage = () => {
       email: "noah.wright@example.com",
       phone: "+1 555-456-7890",
       address: "321 Elm St, Portland, OR",
+      status: "blocked"
     },
     {
       "SL No": 5,
@@ -52,6 +55,7 @@ const UsersPage = () => {
       email: "olivia.hall@example.com",
       phone: "+1 555-567-8901",
       address: "654 Cedar Ln, Atlanta, GA",
+      status: "unblocked"
     },
     {
       "SL No": 6,
@@ -60,6 +64,7 @@ const UsersPage = () => {
       email: "elijah.scott@example.com",
       phone: "+1 555-678-9012",
       address: "987 Spruce Dr, Chicago, IL",
+      status: "blocked"
     },
     {
       "SL No": 7,
@@ -68,6 +73,7 @@ const UsersPage = () => {
       email: "isabella.green@example.com",
       phone: "+1 555-789-0123",
       address: "159 Birch Blvd, Seattle, WA",
+      status: "unblocked"
     },
     {
       "SL No": 8,
@@ -76,6 +82,7 @@ const UsersPage = () => {
       email: "james.young@example.com",
       phone: "+1 555-890-1234",
       address: "753 Willow Pkwy, Phoenix, AZ",
+      status: "blocked"
     },
     {
       "SL No": 9,
@@ -84,6 +91,7 @@ const UsersPage = () => {
       email: "mia.king@example.com",
       phone: "+1 555-901-2345",
       address: "951 Redwood Ct, San Diego, CA",
+      status: "unblocked"
     },
     {
       "SL No": 10,
@@ -92,88 +100,10 @@ const UsersPage = () => {
       email: "benjamin.lewis@example.com",
       phone: "+1 555-012-3456",
       address: "135 Poplar Ln, Salt Lake City, UT",
-    },
-    // {
-    //   "SL No": 11,
-    //   "fullName": "Charlotte Adams",
-    //   "image": "https://i.pravatar.cc/150?img=11",
-    //   "email": "charlotte.adams@example.com",
-    //   "phone": "+1 555-111-2222",
-    //   "address": "246 Magnolia St, Nashville, TN"
-    // },
-    // {
-    //   "SL No": 12,
-    //   "fullName": "William Perez",
-    //   "image": "https://i.pravatar.cc/150?img=12",
-    //   "email": "william.perez@example.com",
-    //   "phone": "+1 555-222-3333",
-    //   "address": "357 Aspen Ave, Kansas City, MO"
-    // },
-    // {
-    //   "SL No": 13,
-    //   "fullName": "Amelia Baker",
-    //   "image": "https://i.pravatar.cc/150?img=13",
-    //   "email": "amelia.baker@example.com",
-    //   "phone": "+1 555-333-4444",
-    //   "address": "468 Chestnut Dr, Madison, WI"
-    // },
-    // {
-    //   "SL No": 14,
-    //   "fullName": "Lucas Rivera",
-    //   "image": "https://i.pravatar.cc/150?img=14",
-    //   "email": "lucas.rivera@example.com",
-    //   "phone": "+1 555-444-5555",
-    //   "address": "579 Walnut Way, Columbus, OH"
-    // },
-    // {
-    //   "SL No": 15,
-    //   "fullName": "Harper Morgan",
-    //   "image": "https://i.pravatar.cc/150?img=15",
-    //   "email": "harper.morgan@example.com",
-    //   "phone": "+1 555-555-6666",
-    //   "address": "680 Cottonwood Pl, Charlotte, NC"
-    // },
-    // {
-    //   "SL No": 16,
-    //   "fullName": "Henry Cox",
-    //   "image": "https://i.pravatar.cc/150?img=16",
-    //   "email": "henry.cox@example.com",
-    //   "phone": "+1 555-666-7777",
-    //   "address": "791 Cypress Ln, Omaha, NE"
-    // },
-    // {
-    //   "SL No": 17,
-    //   "fullName": "Evelyn Ward",
-    //   "image": "https://i.pravatar.cc/150?img=17",
-    //   "email": "evelyn.ward@example.com",
-    //   "phone": "+1 555-777-8888",
-    //   "address": "802 Hickory Rd, Orlando, FL"
-    // },
-    // {
-    //   "SL No": 18,
-    //   "fullName": "Alexander Price",
-    //   "image": "https://i.pravatar.cc/150?img=18",
-    //   "email": "alexander.price@example.com",
-    //   "phone": "+1 555-888-9999",
-    //   "address": "913 Maplewood Ct, Tulsa, OK"
-    // },
-    // {
-    //   "SL No": 19,
-    //   "fullName": "Abigail Jenkins",
-    //   "image": "https://i.pravatar.cc/150?img=19",
-    //   "email": "abigail.jenkins@example.com",
-    //   "phone": "+1 555-999-0000",
-    //   "address": "1021 Fir St, Sacramento, CA"
-    // },
-    // {
-    //   "SL No": 20,
-    //   "fullName": "Daniel Murphy",
-    //   "image": "https://i.pravatar.cc/150?img=20",
-    //   "email": "daniel.murphy@example.com",
-    //   "phone": "+1 555-000-1111",
-    //   "address": "1132 Larch Blvd, Des Moines, IA"
-    // }
+      status: "blocked"
+    }
   ];
+  
 
   const itemRender: PaginationProps["itemRender"] = (
     _,
@@ -191,7 +121,7 @@ const UsersPage = () => {
 
   return (
     <>
-      <section className="bg-white rounded-lg">
+      <section className="bg-white rounded-lg min-h-full">
         <div className="flex justify-between items-center h-[74px] px-6 py-4 shadow">
           {/* Left side - Back icon and title */}
           <div className="flex items-center space-x-4">

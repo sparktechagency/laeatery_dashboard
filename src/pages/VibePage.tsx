@@ -3,6 +3,7 @@ import { Pagination } from "antd";
 import type { PaginationProps } from 'antd';
 import { useNavigate } from "react-router-dom";
 import VibeTable from "../components/vibe/VibeTable";
+import CreateVibeModal from "../components/modal/vibe/CreateVibeModal";
 
 const RestaurantsPage = () => {
   const navigate = useNavigate();
@@ -78,7 +79,7 @@ const RestaurantsPage = () => {
   
   return (
     <>
-      <section className="bg-white rounded-lg">
+      <section className="bg-white rounded-lg min-h-full">
         <div className="flex justify-between items-center h-[74px] px-6 py-4 shadow">
           {/* Left side - Back icon and title */}
           <div className="flex items-center space-x-4">
@@ -103,10 +104,7 @@ const RestaurantsPage = () => {
               />
             </div>
             {/* Add button */}
-            <button className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-primary transition">
-              <FaPlus />
-              Add New
-            </button>
+            <CreateVibeModal/>
           </div>
         </div>
 

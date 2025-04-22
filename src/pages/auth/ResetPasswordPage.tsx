@@ -14,7 +14,7 @@ const ResetPasswordPage = () => {
 
         {/* Title & Subtitle */}
         <h2 className="text-xl font-semibold mb-2">Set a new password</h2>
-        <p className="text-sm text-gray-500 mb-6">
+        <p className="text-md text-gray-500 mb-6">
           Create a new password. Ensure it differs from previous ones for security
         </p>
 

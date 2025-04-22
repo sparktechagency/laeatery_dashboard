@@ -1,9 +1,8 @@
 import { Table } from "antd";
 import { IUser } from "../../types/user.type";
-import { MdOutlineModeEdit } from "react-icons/md";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import profile_img from "../../assets/images/user1.png";
-import profile_placeholder from "../../assets/images/profile_placeholder.png";
+import profile_img from "../../assets/images/vibe.png";
+import EditVibeModal from "../modal/vibe/EditVibeModal";
+import DeleteVibeModal from "../modal/vibe/DeleteVibeModal";
 
 type TProps = {
     restaurants: IUser[];
@@ -29,10 +28,10 @@ const VibeTable = ({ vibes }: TProps) => {
           <img
             src={record?.icon || profile_img}
             alt="profile"
-            className="w-[40px] h-[40px] rounded-lg"
+            className="w-[40px] h-[40px] rounded-full"
             onError={(e) => {
               e.currentTarget.onerror = null;
-              e.currentTarget.src = profile_placeholder;
+              e.currentTarget.src = profile_img;
             }}
           />
       ),
@@ -43,12 +42,8 @@ const VibeTable = ({ vibes }: TProps) => {
       render: (_, record) => (
         <>
           <div className="flex gap-x-3">
-            <button className="bg-edit hover:bg-blue-600 p-1.5 text-white rounded-md">
-              <MdOutlineModeEdit size={18} />
-            </button>
-            <button className="bg-secondary hover:bg-red-600 p-1.5 text-white rounded-md">
-              <RiDeleteBin6Line size={18} />
-            </button>
+            <EditVibeModal/>
+            <DeleteVibeModal vibeId={record?._id}/>
           </div>
         </>
       ),
