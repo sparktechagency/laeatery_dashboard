@@ -19,7 +19,7 @@ const UsersPage = () => {
       email: "ava.thompson@example.com",
       phone: "+1 555-123-4567",
       address: "123 Maple St, Austin, TX",
-      status: "unblocked"
+      status: "unblocked",
     },
     {
       "SL No": 2,
@@ -28,7 +28,7 @@ const UsersPage = () => {
       email: "liam.walker@example.com",
       phone: "+1 555-234-5678",
       address: "456 Oak Ave, Denver, CO",
-      status: "blocked"
+      status: "blocked",
     },
     {
       "SL No": 3,
@@ -37,7 +37,7 @@ const UsersPage = () => {
       email: "emma.harris@example.com",
       phone: "+1 555-345-6789",
       address: "789 Pine Rd, Miami, FL",
-      status: "unblocked"
+      status: "unblocked",
     },
     {
       "SL No": 4,
@@ -46,7 +46,7 @@ const UsersPage = () => {
       email: "noah.wright@example.com",
       phone: "+1 555-456-7890",
       address: "321 Elm St, Portland, OR",
-      status: "blocked"
+      status: "blocked",
     },
     {
       "SL No": 5,
@@ -55,7 +55,7 @@ const UsersPage = () => {
       email: "olivia.hall@example.com",
       phone: "+1 555-567-8901",
       address: "654 Cedar Ln, Atlanta, GA",
-      status: "unblocked"
+      status: "unblocked",
     },
     {
       "SL No": 6,
@@ -64,7 +64,7 @@ const UsersPage = () => {
       email: "elijah.scott@example.com",
       phone: "+1 555-678-9012",
       address: "987 Spruce Dr, Chicago, IL",
-      status: "blocked"
+      status: "blocked",
     },
     {
       "SL No": 7,
@@ -73,7 +73,7 @@ const UsersPage = () => {
       email: "isabella.green@example.com",
       phone: "+1 555-789-0123",
       address: "159 Birch Blvd, Seattle, WA",
-      status: "unblocked"
+      status: "unblocked",
     },
     {
       "SL No": 8,
@@ -82,7 +82,7 @@ const UsersPage = () => {
       email: "james.young@example.com",
       phone: "+1 555-890-1234",
       address: "753 Willow Pkwy, Phoenix, AZ",
-      status: "blocked"
+      status: "blocked",
     },
     {
       "SL No": 9,
@@ -91,7 +91,7 @@ const UsersPage = () => {
       email: "mia.king@example.com",
       phone: "+1 555-901-2345",
       address: "951 Redwood Ct, San Diego, CA",
-      status: "unblocked"
+      status: "unblocked",
     },
     {
       "SL No": 10,
@@ -100,10 +100,9 @@ const UsersPage = () => {
       email: "benjamin.lewis@example.com",
       phone: "+1 555-012-3456",
       address: "135 Poplar Ln, Salt Lake City, UT",
-      status: "blocked"
-    }
+      status: "blocked",
+    },
   ];
-  
 
   const itemRender: PaginationProps["itemRender"] = (
     _,
@@ -121,7 +120,7 @@ const UsersPage = () => {
 
   return (
     <>
-      <section className="bg-white rounded-lg min-h-full">
+      <section className="bg-white rounded-lg h-full relative">
         <div className="flex justify-between items-center h-[74px] px-6 py-4 shadow">
           {/* Left side - Back icon and title */}
           <div className="flex items-center space-x-4">
@@ -146,12 +145,9 @@ const UsersPage = () => {
           </div>
         </div>
 
-        <div>
-          <UserTable users={users} />
-
-          <div className="flex justify-center items-center p-4">
-            <Pagination total={20} itemRender={itemRender} />
-          </div>
+        <UserTable users={users} />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-center p-4">
+          <Pagination total={20} itemRender={itemRender} />
         </div>
       </section>
     </>

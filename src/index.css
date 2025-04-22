@@ -9,3 +9,9 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  .custom-table .ant-table-body {
+    max-height: 300px; /* or height */
+    overflow-y: auto;
+  }
+  

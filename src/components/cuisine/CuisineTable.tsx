@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { Space, Table } from "antd";
 import { IUser } from "../../types/user.type";
 import profile_img from "../../assets/images/user1.png";
 import icon from "../../assets/images/icon.png";
@@ -15,6 +15,9 @@ const CuisineTable = ({ cuisines }: TProps) => {
       title: "SL NO.",
       dataIndex: "sl",
       key: "sl",
+      render: (val)=> (
+        <span className="pl-2">{val}</span>
+      )
     },
     {
       title: "Cuisine",
@@ -55,10 +58,11 @@ const CuisineTable = ({ cuisines }: TProps) => {
   return (
     <>
         <Table
+          size="small"
           columns={columns}
           dataSource={cuisines}
           pagination={false}
-          scroll={{ x: true, y: "60vh" }}
+          scroll={{ x: true, y: "55vh" }}
         />
 
     </>

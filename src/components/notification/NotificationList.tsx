@@ -85,7 +85,7 @@ const NotificationList = () => {
   return (
     <>
        {/* Notification List */}
-       <div className="space-y-3 h-[80%] overflow-y-scroll pr-4">
+       <div className="space-y-3 h-[75%] overflow-y-scroll pr-4">
         {notifications.map((item, index) => (
           <NotificationListItem item={item} key={index} index={index}/>
         ))}

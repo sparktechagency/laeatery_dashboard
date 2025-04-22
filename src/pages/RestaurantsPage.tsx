@@ -111,7 +111,7 @@ const RestaurantsPage = () => {
 
   return (
     <>
-      <section className="bg-white rounded-lg min-h-full">
+      <section className="bg-white rounded-lg h-full relative">
         <div className="flex justify-between items-center h-[74px] px-6 py-4 shadow">
           {/* Left side - Back icon and title */}
           <div className="flex items-center space-x-4">
@@ -140,11 +140,9 @@ const RestaurantsPage = () => {
           </div>
         </div>
 
-        <div>
           <RestaurantTable restaurants={restaurants} />
-          <div className="flex justify-center items-center p-4">
-            <Pagination total={20} itemRender={itemRender} />
-          </div>
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-center p-4">
+          <Pagination total={20} itemRender={itemRender} />
         </div>
       </section>
     </>

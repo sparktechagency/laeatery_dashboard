@@ -14,6 +14,9 @@ const VibeTable = ({ vibes }: TProps) => {
       title: "SL NO.",
       dataIndex: "sl",
       key: "sl",
+      render: (val:number)=> (
+        <span className="pl-2">{val}</span>
+      )
     },
     {
       title: "Vibe Title",

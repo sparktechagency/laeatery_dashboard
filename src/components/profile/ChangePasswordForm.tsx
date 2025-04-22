@@ -10,14 +10,13 @@ const ChangePasswordForm = () => {
     confirm: false,
   });
 
-  const toggleVisibility = (field:TField) => {
+  const toggleVisibility = (field: TField) => {
     setShowPassword({ ...showPassword, [field]: !showPassword[field] });
   };
 
-
-
   return (
     <>
+      {/* Change Password Form */}
       <form className="space-y-4">
         <div>
           <label className="block text-gray-700">Current Password</label>

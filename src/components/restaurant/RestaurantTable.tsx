@@ -12,7 +12,7 @@ type TProps = {
 const RestaurantTable = ({ restaurants }: TProps) => {
   const columns = [
     {
-      title: "SL NO.",
+      title: "SL",
       dataIndex: "slNo",
       key: "slNo",
     },
@@ -68,10 +68,11 @@ const RestaurantTable = ({ restaurants }: TProps) => {
   return (
     <>
         <Table
+          size="small"
           columns={columns}
           dataSource={restaurants}
           pagination={false}
-          scroll={{ x: true, y: "60vh" }}
+          scroll={{ x: true, y: "55vh" }}
         />
 
     </>

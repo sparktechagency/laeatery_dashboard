@@ -15,6 +15,9 @@ const UserTable = ({ users }: TProps) => {
       title: "SL NO.",
       dataIndex: "SL No",
       key: "SL No",
+      render: (val:number)=> (
+        <span className="pl-2">{val}</span>
+      )
     },
     {
       title: "Full Name",
@@ -91,10 +94,12 @@ const UserTable = ({ users }: TProps) => {
   return (
     <>
         <Table
+          size="small"
           columns={columns}
           dataSource={users}
           pagination={false}
-          scroll={{ x: true, y: "60vh" }}
+          scroll={{ x: true, y: "55vh" }}
+          className="custom-table"
         />
 
     </>

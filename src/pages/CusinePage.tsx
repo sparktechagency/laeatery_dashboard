@@ -108,11 +108,9 @@ const CusinePage = () => {
           </div>
         </div>
 
-        <div>
           <CuisineTable cuisines={cuisines} />
-          <div className="flex justify-center items-center p-4">
-            <Pagination total={20} itemRender={itemRender} />
-          </div>
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-center p-4">
+          <Pagination total={20} itemRender={itemRender} />
         </div>
       </section>
     </>
