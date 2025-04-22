@@ -17,7 +17,7 @@ const AboutPage = () => {
   };
 
   return (
-    <div className="min-h-full bg-gray-50 py-6 relative">
+    <div className="h-full bg-gray-50 py-6 relative rounded-md">
       <div className="mx-auto p-8 rounded-lg">
         {/* Back button */}
         <div className="text-left mb-6 text-lg font-semibold flex items-center gap-2">

@@ -57,6 +57,7 @@ const VibeTable = ({ vibes }: TProps) => {
   return (
     <>
         <Table
+          size="small"
           columns={columns}
           dataSource={vibes}
           pagination={false}

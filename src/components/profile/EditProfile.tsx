@@ -1,8 +1,12 @@
-import { FaCamera } from "react-icons/fa";
 
-const EditProfile = () => {
+type TProps = {
+  file: null | File;
+}
+
+const EditProfile = ({ file }: TProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(file);
   };
 
   return (

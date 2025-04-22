@@ -1,6 +1,5 @@
 import { Table } from "antd";
 import { IUser } from "../../types/user.type";
-import { IoEyeSharp } from "react-icons/io5";
 import EditRestaurantModal from "../modal/restaurant/EditRestaurantModal";
 import DeleteRestaurantModal from "../modal/restaurant/DeleteRestaurantModal";
 import ViewRestaurantModal from "../modal/restaurant/ViewRestaurantModal";

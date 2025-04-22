@@ -1,6 +1,6 @@
 import { FaArrowLeft, FaPlus, FaSearch } from "react-icons/fa";
 import { Pagination } from "antd";
-import type { PaginationProps } from 'antd';
+import type { PaginationProps } from "antd";
 import { useNavigate } from "react-router-dom";
 import CuisineTable from "../components/cuisine/CuisineTable";
 import CreateCuisineModal from "../components/modal/cuisine/CreateCuisineModal";
@@ -8,78 +8,80 @@ import CreateCuisineModal from "../components/modal/cuisine/CreateCuisineModal";
 const CusinePage = () => {
   const navigate = useNavigate();
   const handleGoBack = () => {
-    navigate(-1); 
+    navigate(-1);
   };
 
   // getCuisines
   const cuisines = [
     {
-      "sl": 1,
-      "title": "Italian",
-      "icon": "https://example.com/images/cuisines/italian.png"
+      sl: 1,
+      title: "Italian",
+      icon: "https://example.com/images/cuisines/italian.png",
     },
     {
-      "sl": 2,
-      "title": "Mexican",
-      "icon": "https://example.com/images/cuisines/mexican.png"
+      sl: 2,
+      title: "Mexican",
+      icon: "https://example.com/images/cuisines/mexican.png",
     },
     {
-      "sl": 3,
-      "title": "Indian",
-      "icon": "https://example.com/images/cuisines/indian.png"
+      sl: 3,
+      title: "Indian",
+      icon: "https://example.com/images/cuisines/indian.png",
     },
     {
-      "sl": 4,
-      "title": "Chinese",
-      "icon": "https://example.com/images/cuisines/chinese.png"
+      sl: 4,
+      title: "Chinese",
+      icon: "https://example.com/images/cuisines/chinese.png",
     },
     {
-      "sl": 5,
-      "title": "Japanese",
-      "icon": "https://example.com/images/cuisines/japanese.png"
+      sl: 5,
+      title: "Japanese",
+      icon: "https://example.com/images/cuisines/japanese.png",
     },
     {
-      "sl": 6,
-      "title": "Thai",
-      "icon": "https://example.com/images/cuisines/thai.png"
+      sl: 6,
+      title: "Thai",
+      icon: "https://example.com/images/cuisines/thai.png",
     },
     {
-      "sl": 7,
-      "title": "French",
-      "icon": "https://example.com/images/cuisines/french.png"
+      sl: 7,
+      title: "French",
+      icon: "https://example.com/images/cuisines/french.png",
     },
     {
-      "sl": 8,
-      "title": "Korean",
-      "icon": "https://example.com/images/cuisines/korean.png"
+      sl: 8,
+      title: "Korean",
+      icon: "https://example.com/images/cuisines/korean.png",
     },
     {
-      "sl": 9,
-      "title": "Greek",
-      "icon": "https://example.com/images/cuisines/greek.png"
+      sl: 9,
+      title: "Greek",
+      icon: "https://example.com/images/cuisines/greek.png",
     },
     {
-      "sl": 10,
-      "title": "Middle Eastern",
-      "icon": "https://example.com/images/cuisines/middle-eastern.png"
-    }
-  ]
-  
-  
+      sl: 10,
+      title: "Middle Eastern",
+      icon: "https://example.com/images/cuisines/middle-eastern.png",
+    },
+  ];
 
-  const itemRender: PaginationProps['itemRender'] = (_, type, originalElement) => {
-    if (type === 'prev') {
+  const itemRender: PaginationProps["itemRender"] = (
+    _,
+    type,
+    originalElement
+  ) => {
+    if (type === "prev") {
       return <a>Previous</a>;
     }
-    if (type === 'next') {
+    if (type === "next") {
       return <a>Next</a>;
     }
     return originalElement;
   };
-  
+
   return (
     <>
-      <section className="bg-white rounded-lg min-h-full">
+      <section className="bg-white rounded-lg h-full relative">
         <div className="flex justify-between items-center h-[74px] px-6 py-4 shadow">
           {/* Left side - Back icon and title */}
           <div className="flex items-center space-x-4">
@@ -104,17 +106,17 @@ const CusinePage = () => {
               />
             </div>
             {/* Add button */}
-            <CreateCuisineModal/>
+            <CreateCuisineModal />
           </div>
         </div>
 
-          <CuisineTable cuisines={cuisines} />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-center p-4">
+        <CuisineTable cuisines={cuisines} />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-center p-4">
           <Pagination total={20} itemRender={itemRender} />
         </div>
       </section>
     </>
   );
-}
+};
 
-export default CusinePage
+export default CusinePage;

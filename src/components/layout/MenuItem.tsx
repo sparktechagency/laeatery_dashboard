@@ -41,7 +41,7 @@ const MenuItem = ({ item } : {item:any}) => {
             <div
               key={index}
               onClick={() => navigate(child.path)}
-              className={`text-sm px-2 py-1 rounded cursor-pointer ${
+              className={`text-md px-2 py-1 rounded cursor-pointer ${
                 pathname === child.path
                   ? 'bg-black text-white'
                   : 'text-gray-600 hover:bg-gray-100'

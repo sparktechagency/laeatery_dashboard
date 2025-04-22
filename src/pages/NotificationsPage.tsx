@@ -9,7 +9,7 @@ const NotificationsPage = () => {
   };
 
   return (
-    <div className="h-full p-6 bg-gray-50">
+    <div className="h-full p-6 bg-gray-50 rounded-md">
       {/* Back button */}
       <div className="text-left mb-6 text-lg font-semibold flex items-center gap-2">
         <FaArrowLeft
