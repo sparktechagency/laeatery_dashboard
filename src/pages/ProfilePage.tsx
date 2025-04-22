@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { FaCamera } from 'react-icons/fa';
-//import 'antd/dist/antd.min.css';
-
 const { TabPane } = Tabs;
 
 const ProfileSettings = () => {
