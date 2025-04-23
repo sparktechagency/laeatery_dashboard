@@ -1,6 +1,6 @@
 import {apiSlice} from "../api/apiSlice.js";
-import {SuccessToast} from "../../../helper/ValidationHelper.js";
-import {setEmail, setOtp, } from "../../../helper/SessionHelper.js";
+import {ErrorToast, SuccessToast} from "../../../helper/ValidationHelper.js";
+import {setEmail, setOtp, setToken, } from "../../../helper/SessionHelper.js";
 import {SetForgotError, SetLoginError, SetNewPasswordError, SetRegisterError, SetVerifyOtpError} from "./authSlice.js";
 
 
@@ -15,6 +15,9 @@ export const authApi = apiSlice.injectEndpoints({
             async onQueryStarted(arg, {queryFulfilled, dispatch}){
                 try{
                     const res = await queryFulfilled;
+                    const token = res?.data?.data?.accessToken;
+                    setToken(token)
+                    SuccessToast("Login Success")
                     // console.log(res?.meta?.response?.status);
                     // if(res?.data?.message === "success"){
                     //     let MyToken = res.data['token'];
@@ -25,22 +28,17 @@ export const authApi = apiSlice.injectEndpoints({
                     //     },500)
                     // }
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                }catch(err:any) {
-                    console.log(err);
+                }catch(err:any) {                    
                     const status = err?.error?.status;
-                    console.log(status);
                     if(status === 404){
                         dispatch(SetLoginError("Could not Find this Email!"));
                     }
                     if(status === 400){
                         dispatch(SetLoginError("Wrong Password!"));
                     }
-                    // else if(status === 403){
-                    //     dispatch(SetLoginError("This Account is Banned"));
-                    // }else{
-                    //     // dispatch(SetLoginError("Something Went Wrong!"));
-                    //     // console.log(err)
-                    // }
+                    if(status === 500){
+                        dispatch(SetLoginError("Something Went Wrong"));
+                    }    
                 }
             }
         }),

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import Error from "../validation/Error";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../schema/auth.schema";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
+import { SetLoginError } from "../../redux/features/auth/authSlice";
 
 type FormValues = {
   email: string;
@@ -14,6 +15,7 @@ type FormValues = {
 };
 
 const LoginForm = () => {
+  const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const { LoginError } = useAppSelector((state) => state.auth);
   const [login, {isLoading}] = useLoginMutation()
@@ -22,12 +24,13 @@ const LoginForm = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
+    dispatch(SetLoginError(""))
     login(data)
   };
 
   return (
     <>
-      {LoginError && <Error message="Couldn't find this email address" />}
+      {LoginError && <Error message={LoginError} />}
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Email Input */}
         <div className="text-left mb-4">
