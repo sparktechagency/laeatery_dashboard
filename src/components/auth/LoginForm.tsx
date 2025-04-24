@@ -9,6 +9,7 @@ import { loginSchema } from "../../schema/auth.schema";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
 import { SetLoginError } from "../../redux/features/auth/authSlice";
 import { setToken } from "../../helper/SessionHelper";
+import { SuccessToast } from "../../helper/ValidationHelper";
 
 type FormValues = {
   email: string;
@@ -17,17 +18,24 @@ type FormValues = {
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
   const { LoginError } = useAppSelector((state) => state.auth);
   const [login, {isLoading}] = useLoginMutation()
   const { handleSubmit, control } = useForm({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "goni@gmail.com",
+      password: "123456"
+    }
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     //dispatch(SetLoginError(""))
     //login(data)
      setToken("token11111111111");
+     SuccessToast("Login Success");
+     navigate("/")
   };
 
   return (
