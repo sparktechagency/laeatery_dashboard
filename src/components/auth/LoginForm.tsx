@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../schema/auth.schema";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
 import { SetLoginError } from "../../redux/features/auth/authSlice";
+import { setToken } from "../../helper/SessionHelper";
 
 type FormValues = {
   email: string;
@@ -24,8 +25,9 @@ const LoginForm = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    dispatch(SetLoginError(""))
-    login(data)
+    //dispatch(SetLoginError(""))
+    //login(data)
+     setToken("token11111111111");
   };
 
   return (

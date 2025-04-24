@@ -16,11 +16,13 @@ import VerifyOtpPage from "../pages/auth/VerifyOtpPage";
 import LoginPage from "../pages/auth/LoginPage";
 import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
 import NotificationsPage from "../pages/NotificationsPage";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <DashboardLayout />,
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
     // loader: rootLoader,
     children: [
       {
@@ -76,19 +78,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <LoginPage/>
+    element: <PublicRoute><LoginPage/></PublicRoute>
   },
   {
     path: "/forgot-password",
-    element: <ForgotPasswordPage/>
+    element: <PublicRoute><ForgotPasswordPage/></PublicRoute>
   },
   {
     path: "/verify-otp",
-    element: <VerifyOtpPage/>
+    element: <PublicRoute><VerifyOtpPage/></PublicRoute>
   },
   {
     path: "/reset-password",
-    element: <ResetPasswordPage/>
+    element: <PublicRoute><ResetPasswordPage/></PublicRoute>
   }
 ]);
 
