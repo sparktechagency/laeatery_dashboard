@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';

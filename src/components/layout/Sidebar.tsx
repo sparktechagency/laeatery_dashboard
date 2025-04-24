@@ -4,6 +4,7 @@ import MenuItem from './MenuItem';
 import { menuItems } from '../../data/data';
 import { TbLogout } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
+import { logout } from '../../helper/SessionHelper';
 const { Sider } = Layout;
 
 
@@ -47,7 +48,7 @@ const Sidebar = () => {
         {/* Fixed Logout Button */}
         <div className="px-4 py-3 w-full absolute bottom-10">
           <div
-            onClick={() => navigate("/login")}
+            onClick={() => logout()}
             className="flex items-center gap-3 px-3 py-2 rounded cursor-pointer hover:bg-gray-100 text-primary font-medium"
           >
             <TbLogout className="text-[20px]" />{" "}
