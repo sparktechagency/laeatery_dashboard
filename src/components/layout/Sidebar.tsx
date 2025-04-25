@@ -1,11 +1,9 @@
-import { Layout} from 'antd';
 import Logo from '../../assets/images/logo.png';
 import MenuItem from './MenuItem';
 import { menuItems } from '../../data/data';
 import { TbLogout } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../helper/SessionHelper';
-const { Sider } = Layout;
 
 
 const Sidebar = () => {
@@ -13,18 +11,8 @@ const Sidebar = () => {
 
   return (
     <>
-      <Sider
-        width={250}
-        style={{
-          height: "100vh",
-          position: "fixed",
-          left: 0,
-          top: 0,
-          backgroundColor: "#fff",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
+      <div
+        className="w-[250px] h-screen fixed left-0 top-0 bg-white flex flex-col justify-between"
       >
         <div className="flex flex-col flex-1 overflow-y-auto ">
           {/* Logo */}
@@ -55,7 +43,7 @@ const Sidebar = () => {
             <span className="text-lg">Logout</span>
           </div>
         </div>
-      </Sider>
+      </div>
     </>
   );
 }

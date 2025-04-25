@@ -19,11 +19,11 @@ const Profile = () => {
     <div className="flex-grow flex justify-center">
       <div className="w-full max-w-xl p-6 rounded-2xl self-center">
         <div className="flex flex-col items-center">
-          {isProfile ? (
-            <EditProfilePic setFile={setFile}/>
-          ) : (
+          {/* {isProfile ? ( */}
+            <EditProfilePic setFile={setFile} isProfile={isProfile}/>
+          {/* ) : (
             <h2 className="mt-4 text-xl font-semibold">Change Password</h2>
-          )}
+          )} */}
         </div>
 
         {/* Tabs Part */}
