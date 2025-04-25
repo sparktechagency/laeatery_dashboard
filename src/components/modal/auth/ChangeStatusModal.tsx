@@ -42,7 +42,7 @@ const ChangeStatusModal = ({ userId, status }) => {
       </button>
       <Modal
         title={
-          <span className="font-bold text-xl">Update Restaurant Status</span>
+          <span className="font-bold text-xl">Update Status</span>
         }
         open={modalOpen}
         onCancel={() => {
@@ -81,8 +81,7 @@ const ChangeStatusModal = ({ userId, status }) => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full mt-4 bg-red-500 hover:bg-red-600 duration-200 p-2 border-0 rounded-md text-white flex justify-center items-center gap-x-2 disabled:cursor-not-allowed"
-          >
+            className="bg-black w-full text-white px-4 py-2 rounded-md hover:bg-gray-800"          >
             {isLoading ? (
               <>
                 <CgSpinnerTwo className="animate-spin" fontSize={16} />
