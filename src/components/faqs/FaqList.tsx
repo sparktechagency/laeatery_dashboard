@@ -1,6 +1,6 @@
 import FaqItem from "./FaqItem";
 
-export const FaqList = () => {
+const FaqList = () => {
     const faqs = [
         {
           question: "How do I find restaurants on LAEATERY?",
@@ -54,3 +54,5 @@ export const FaqList = () => {
     </>
   )
 }
+
+export default FaqList;

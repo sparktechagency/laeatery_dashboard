@@ -1,5 +1,5 @@
 import CreateFaqModal from "../components/modal/faq/CreateFaqModal";
-import { FaqList } from "../components/faqs/FaqList";
+import FaqList from "../components/faqs/FaqList";
 
 
 const FaqsPage = () => {
