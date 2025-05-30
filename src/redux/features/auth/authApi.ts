@@ -1,7 +1,8 @@
-import {apiSlice} from "../api/apiSlice.js";
-import {ErrorToast, SuccessToast} from "../../../helper/ValidationHelper.js";
-import {setEmail, setOtp, setToken, } from "../../../helper/SessionHelper.js";
-import {SetForgotError, SetLoginError, SetNewPasswordError, SetRegisterError, SetVerifyOtpError} from "./authSlice.js";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { setEmail, setOtp, setToken } from "../../../helper/SessionHelper.ts";
+import { SuccessToast } from "../../../helper/ValidationHelper.ts";
+import {apiSlice} from "../api/apiSlice.ts";
+import { SetForgotError, SetLoginError, SetNewPasswordError, SetVerifyOtpError } from "./authSlice.ts";
 
 
 export const authApi = apiSlice.injectEndpoints({
@@ -12,21 +13,21 @@ export const authApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data
             }),
-            async onQueryStarted(arg, {queryFulfilled, dispatch}){
+            async onQueryStarted(_arg, {queryFulfilled, dispatch}){
                 try{
                     const res = await queryFulfilled;
                     const token = res?.data?.data?.accessToken;
-                    setToken(token)
-                    SuccessToast("Login Success")
-                    // console.log(res?.meta?.response?.status);
-                    // if(res?.data?.message === "success"){
-                    //     let MyToken = res.data['token'];
-                    //     setToken(MyToken);
-                    //     SuccessToast("Login Success");
-                    //     setTimeout(()=>{
-                    //         window.location.href="/";
-                    //     },500)
-                    // }
+                    const role = res?.data?.data?.user?.authId?.role;
+                    if(role==="ADMIN" || role ==="SUPER_ADMIN"){
+                        setToken(token)
+                        SuccessToast("Login Success")
+                        setTimeout(()=>{
+                            window.location.href="/"
+                        }, 300)
+                    }
+                    else{
+                      dispatch(SetLoginError("You are not admin!"));  
+                    }
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 }catch(err:any) {                    
                     const status = err?.error?.status;
@@ -42,21 +43,19 @@ export const authApi = apiSlice.injectEndpoints({
                 }
             }
         }),
-        forgotPasswordVerifyEmail: builder.mutation({
+        forgotPasswordSendOtp: builder.mutation({
             query: (data) => ({
-                url: "/auth/forgot-password-verify-email",
+                url: "/auth/forgot-password",
                 method: "POST",
                 body: data
             }),
             async onQueryStarted(arg, {queryFulfilled, dispatch}){
                 try{
-                    const res = await queryFulfilled;
-                    let status = res?.meta?.response?.status;
-                    if(status === 200){
-                        setEmail(arg.email)
-                        // SuccessToast("Success");
-                    }
-                }catch(err) {
+                   // const res = await queryFulfilled;
+                   //const status = res?.meta?.response?.status;
+                   SuccessToast("OTP send success")
+            
+                }catch(err:any) {
                     const status = err?.error?.status;
                     if(status === 404) {
                         dispatch(SetForgotError("Could not Find this Email!"));
@@ -76,10 +75,6 @@ export const authApi = apiSlice.injectEndpoints({
                 try{
                     const res = await queryFulfilled;
                     let status = res?.meta?.response?.status;
-                    if(status === 200){
-                        setOtp(arg.otp)
-                        // SuccessToast("Success");
-                    }
                 }catch(err) {
                     const status = err?.error?.status;
                     let result = err?.error?.data?.data;
@@ -97,7 +92,7 @@ export const authApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data
             }),
-            async onQueryStarted(arg, {queryFulfilled, dispatch}){
+            async onQueryStarted(_arg, {queryFulfilled, dispatch}){
                 try{
                     const res = await queryFulfilled;
                     let status = res?.meta?.response?.status;
@@ -120,4 +115,4 @@ export const authApi = apiSlice.injectEndpoints({
 })
 
 
-export const {useLoginMutation, useForgotPasswordVerifyEmailMutation, useForgotPasswordVerifyOtpMutation, useCreateNewPasswordMutation} = authApi;
+export const {useLoginMutation, useForgotPasswordSendOtpMutation, useForgotPasswordVerifyOtpMutation, useCreateNewPasswordMutation} = authApi;

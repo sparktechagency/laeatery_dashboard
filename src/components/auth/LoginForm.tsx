@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import Error from "../validation/Error";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
@@ -8,41 +8,35 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../schema/auth.schema";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
 import { SetLoginError } from "../../redux/features/auth/authSlice";
-import { setToken } from "../../helper/SessionHelper";
-import { SuccessToast } from "../../helper/ValidationHelper";
+import { CgSpinnerTwo } from "react-icons/cg";
 
-type FormValues = {
+type TFormValues = {
   email: string;
   password: string;
 };
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
   const { LoginError } = useAppSelector((state) => state.auth);
-  const [login, {isLoading}] = useLoginMutation()
+  const [login, { isLoading }] = useLoginMutation();
   const { handleSubmit, control } = useForm({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "goni@gmail.com",
-      password: "123456"
-    }
+      email: "goniosman715149123@gmail.com",
+      password: "1qaz2wwss",
+    },
   });
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    //dispatch(SetLoginError(""))
-    //login(data)
-     setToken("token11111111111");
-     SuccessToast("Login Success");
-     navigate("/")
+  const onSubmit: SubmitHandler<TFormValues> = (data) => {
+    dispatch(SetLoginError(""));
+    login(data);
   };
 
   return (
     <>
       {LoginError && <Error message={LoginError} />}
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Email Input */}
         <div className="text-left mb-4">
           <label className="text-sm font-medium text-gray-700 mb-1 block">
             Email address
@@ -56,7 +50,7 @@ const LoginForm = () => {
             }) => (
               <>
                 <input
-                  type="email"
+                  type="text"
                   onChange={onChange}
                   onBlur={onBlur}
                   value={value}
@@ -75,7 +69,6 @@ const LoginForm = () => {
           />
         </div>
 
-        {/* Password Input */}
         <div className="text-left mb-4">
           <label className="text-sm font-medium text-gray-700 mb-1 block">
             Password
@@ -102,17 +95,15 @@ const LoginForm = () => {
                   >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </div>
-                  
                 </div>
                 {error && (
-                    <p className="text-red-600 text-sm mt-1">{error.message}</p>
+                  <p className="text-red-600 text-sm mt-1">{error.message}</p>
                 )}
               </>
             )}
           />
         </div>
 
-        {/* Remember & Forgot Password */}
         <div className="flex justify-between items-center text-sm mb-6">
           <label className="flex items-center gap-2 text-gray-700">
             <input type="checkbox" className="form-checkbox accent-black" />
@@ -123,15 +114,19 @@ const LoginForm = () => {
           </Link>
         </div>
 
-        {/* Sign In Button */}
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition disabled:bg-gray-800 disabled:cursor-not-allowed"
+          className="w-full flex items-center justify-center gap-2 bg-black text-white py-2 rounded-md hover:bg-gray-800 transition disabled:bg-gray-800 disabled:cursor-not-allowed"
         >
-          {
-            isLoading ? "Processing" : "Sign in" 
-          }
+          {isLoading ? (
+            <>
+              <CgSpinnerTwo className="animate-spin" fontSize={16} />
+              Processing...
+            </>
+          ) : (
+            "Sign In"
+          )}
         </button>
       </form>
     </>

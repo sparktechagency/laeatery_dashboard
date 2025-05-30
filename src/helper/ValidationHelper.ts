@@ -1,18 +1,14 @@
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 class ValidationHelper {
-    LoadingToast(msg:string){
-        return toast.loading(msg);
-    }
    
-    //params[0] = msg params[2] = toastId
-    SuccessToast(...params: (string | number)[]){
-        toast.success(params[0], { id:params[1], duration:2000 });
+    SuccessToast(msg:string){
+        toast.success(msg);
     }
 
-    ErrorToast(...params: (string | number)[]){
-        toast.error(params[0], { id:params[1], duration:2000 });
+    ErrorToast(msg:string){
+        toast.error(msg);
     }
 }
 
-export const {LoadingToast, SuccessToast, ErrorToast } = new ValidationHelper();
+export const { SuccessToast, ErrorToast } = new ValidationHelper();
