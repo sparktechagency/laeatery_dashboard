@@ -1,63 +1,135 @@
 import { useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { CgSpinnerTwo } from "react-icons/cg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useAppSelector } from "../../redux/hooks/hooks";
+import { useForgotPasswordResetMutation } from "../../redux/features/auth/authApi";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Error from "../validation/Error";
+import { useDispatch } from "react-redux";
+import { resetPasswordSchema } from "../../schema/auth.schema";
+import { SetResetPasswordError } from "../../redux/features/auth/authSlice";
+import PasswordStrength from "../validation/PasswordStrength";
+
+type TFormValues = {
+  newPassword: string;
+  confirmPassword: string;
+};
 
 const ResetPasswordForm = () => {
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const dispatch = useDispatch();
+  const { ResetPasswordError } = useAppSelector((state) => state.auth);
+  const [forgotPasswordReset, { isLoading }] = useForgotPasswordResetMutation();
+  const { handleSubmit, control, watch } = useForm({
+      resolver: zodResolver(resetPasswordSchema),
+      mode: "onChange"
+  });
+
+   const newPassword = watch('newPassword');
+  
+  
+    const onSubmit: SubmitHandler<TFormValues> = (data) => {
+      dispatch(SetResetPasswordError(""));
+      forgotPasswordReset(data)
+    };
+
+
+
 
   return (
-    <div className="">
-      {/* New Password Field */}
-      <div className="mb-4 text-left">
-        <label className="text-sm font-medium text-gray-700 mb-1 block">
-          New Password
-        </label>
-        <div className="relative">
-          <input
-            type={showNew ? "text" : "password"}
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            placeholder="Enter here.."
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500"
+     <>
+      {ResetPasswordError && <Error message={ResetPasswordError} />}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="text-left mb-4">
+          <label className="text-sm font-medium text-gray-700 mb-1 block">
+           New Password
+          </label>
+          <Controller
+            control={control}
+            name="newPassword"
+            render={({ field, fieldState: { error } }) => (
+              <>
+                <div className="relative">
+                  <input
+                    {...field}
+                    type={showNew ? "text" : "password"}
+                    placeholder="Enter new password"
+                    className={`w-full border focus:outline-none rounded-md px-4 py-2 pr-10 ${
+                      error
+                        ? "border-red-500 focus:border-red-500"
+                        : "border-gray-300 focus:border-blue-500"
+                    }`}
+                  />
+                  <div
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 cursor-pointer"
+                    onClick={() => setShowNew(!showNew)}
+                  >
+                    {showNew ? <FaEyeSlash /> : <FaEye />}
+                  </div>
+                </div>
+                {error && (
+                  <p className="text-red-600 text-sm mt-1">{error.message}</p>
+                )}
+              </>
+            )}
           />
-          <div
-            className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-            onClick={() => setShowNew(!showNew)}
-          >
-            {showNew ? <FaEyeSlash /> : <FaEye />}
-          </div>
+           {newPassword && <PasswordStrength password={newPassword} />}
         </div>
-      </div>
 
-      {/* Confirm Password Field */}
-      <div className="mb-6 text-left">
-        <label className="text-sm font-medium text-gray-700 mb-1 block">
+        <div className="text-left mb-4">
+          <label className="text-sm font-medium text-gray-700 mb-1 block">
           Confirm New Password
-        </label>
-        <div className="relative">
-          <input
-            type={showConfirm ? "text" : "password"}
-            value={confirmPassword}
-            placeholder="Enter here.."
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500"
+          </label>
+          <Controller
+            control={control}
+            name="confirmPassword"
+            render={({ field, fieldState: { error } }) => (
+              <>
+                <div className="relative">
+                  <input
+                    {...field}
+                    type={showConfirm ? "text" : "password"}
+                    placeholder="Enter confirm password"
+                    className={`w-full border focus:outline-none rounded-md px-4 py-2 pr-10 ${
+                      error
+                        ? "border-red-500 focus:border-red-500"
+                        : "border-gray-300 focus:border-blue-500"
+                    }`}
+                  />
+                  <div
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 cursor-pointer"
+                    onClick={() => setShowConfirm(!showConfirm)}
+                  >
+                    {showConfirm ? <FaEyeSlash /> : <FaEye />}
+                  </div>
+                </div>
+                {error && (
+                  <p className="text-red-600 text-sm mt-1">{error.message}</p>
+                )}
+              </>
+            )}
           />
-          <div
-            className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-            onClick={() => setShowConfirm(!showConfirm)}
-          >
-            {showConfirm ? <FaEyeSlash /> : <FaEye />}
-          </div>
         </div>
-      </div>
 
-      {/* Reset Button */}
-      <button className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition">
-        Reset Password
-      </button>
-    </div>
+        
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full flex items-center justify-center gap-2 bg-black text-white py-2 rounded-md hover:bg-gray-800 transition disabled:bg-gray-800 disabled:cursor-not-allowed"
+        >
+          {isLoading ? (
+            <>
+              <CgSpinnerTwo className="animate-spin" fontSize={16} />
+              Processing...
+            </>
+          ) : (
+            "Set Password"
+          )}
+        </button>
+      </form>
+     </>
   );
 };
 

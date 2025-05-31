@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { SuccessToast } from "../../helper/ValidationHelper";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { useNavigate } from "react-router-dom";
 import { useForgotPasswordVerifyOtpMutation } from "../../redux/features/auth/authApi";
 import Error from "../validation/Error";
+import { getEmail } from "../../helper/SessionHelper";
+import { SetVerifyOtpError } from "../../redux/features/auth/authSlice";
+import { CgSpinnerTwo } from "react-icons/cg";
 
 const VerifyOtpForm = () => {
   const [code, setCode] = useState<string[]>(new Array(6).fill(""));
@@ -53,23 +55,26 @@ const VerifyOtpForm = () => {
   //otp is verified successfully
   useEffect(() => {
     if (!isLoading && isSuccess) {
-      navigate("/verify-otp");
+      navigate("/reset-password");
     }
   }, [navigate, isSuccess, isLoading]);
 
+
+
   const handleVerify = () => {
     const otp = code.join("");
-    console.log({
-      otp
+    dispatch(SetVerifyOtpError(""))
+    forgotPasswordVerifyotp({
+      email: getEmail(),
+      code: otp,
     });
-    SuccessToast("Verify Success");
   };
 
   return (
     <>
       {/* Code Inputs */}
       {VerifyOtpError && <Error message={VerifyOtpError} />}
-      <div className="flex justify-center gap-2 md:gap-3 mb-6">
+      <div className="flex justify-center gap-2 md:gap-3 mb-6 mt-4">
         {code.map((digit, idx) => (
           <input
             key={idx}
@@ -90,9 +95,16 @@ const VerifyOtpForm = () => {
       <button
         onClick={handleVerify}
         disabled={isDisabled || isLoading}
-        className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 disabled:bg-gray-800 transition mb-4 disabled:cursor-not-allowed"
+        className="w-full flex items-center justify-center gap-2 bg-black text-white py-2 rounded-md hover:bg-gray-800 disabled:bg-gray-800 transition mb-4 disabled:cursor-not-allowed"
       >
-        {isLoading ? "Verifying..." : "Verify"}
+        {isLoading ? (
+          <>
+            <CgSpinnerTwo className="animate-spin" fontSize={16} />
+            Verifying...
+          </>
+        ) : (
+          "Verify"
+        )}
       </button>
 
       {/* Resend */}
