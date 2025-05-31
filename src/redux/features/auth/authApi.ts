@@ -28,7 +28,7 @@ export const authApi = apiSlice.injectEndpoints({
                     else{
                       dispatch(SetLoginError("You are not admin!"));  
                     }
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                 
                 }catch(err:any) {                    
                     const status = err?.error?.status;
                     if(status === 404){
@@ -49,39 +49,43 @@ export const authApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data
             }),
-            async onQueryStarted(arg, {queryFulfilled, dispatch}){
+            async onQueryStarted({ email }, {queryFulfilled, dispatch}){
                 try{
-                   // const res = await queryFulfilled;
-                   //const status = res?.meta?.response?.status;
-                   SuccessToast("OTP send success")
-            
+                   await queryFulfilled;
+                   setEmail(email)
+                   SuccessToast("OTP is sent successfully")
                 }catch(err:any) {
                     const status = err?.error?.status;
-                    if(status === 404) {
+                    if(status === 400) {
                         dispatch(SetForgotError("Could not Find this Email!"));
                     } else{
-                        // console.log(err)
+                        dispatch(SetForgotError("Something Went Wrong"));
                     }
                 }
             }
         }),
         forgotPasswordVerifyOtp: builder.mutation({
             query: (data) => ({
-                url: "/auth/forgot-password-verify-otp",
+                url: "/auth/verify-otp",
                 method: "POST",
                 body: data
             }),
-            async onQueryStarted(arg, {queryFulfilled, dispatch}){
+            async onQueryStarted(_arg, {queryFulfilled, dispatch}){
                 try{
-                    const res = await queryFulfilled;
-                    let status = res?.meta?.response?.status;
-                }catch(err) {
+                    await queryFulfilled;
+                    SuccessToast("Otp is verified successfully");
+                }catch(err:any) {
                     const status = err?.error?.status;
-                    let result = err?.error?.data?.data;
+                    const message = err?.error?.data?.message
                     if(status === 400) {
-                        dispatch(SetVerifyOtpError(result));
+                        if(message === "Account does not exist!"){
+                            dispatch(SetVerifyOtpError("Could not Find this Email!"));
+                        }
+                        if(message === "Invalid reset code!"){
+                            dispatch(SetVerifyOtpError("Invalid otp code"));
+                        }
                     } else{
-                        // console.log(err)
+                        dispatch(SetVerifyOtpError("ISomething Went Wrong"));
                     }
                 }
             }

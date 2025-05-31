@@ -1,58 +1,48 @@
-import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { useForgotPasswordSendOtpMutation } from "../../redux/features/auth/authApi";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { forgotPasswordSendOtpSchema } from "../../schema/auth.schema";
+import { SetForgotError } from "../../redux/features/auth/authSlice";
+import Error from "../validation/Error";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { CgSpinnerTwo } from "react-icons/cg";
 
 type IFormValues = {
   email: string;
-  password: string;
 };
 
-
 const ForgotPasswordForm = () => {
-    const dispatch = useAppDispatch();
-    const [showPassword, setShowPassword] = useState(false);
-    const { LoginError } = useAppSelector((state) => state.auth);
-    const [forgotPasswordSendOtp, { isLoading }] =
-      useForgotPasswordSendOtpMutation();
-    const { handleSubmit, control } = useForm({
-      resolver: zodResolver(loginSchema),
-      defaultValues: {
-        email: "goniosman715149123@gmail.com",
-        password: "1qaz2wwss",
-      },
-    });
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { ForgotError } = useAppSelector((state) => state.auth);
+  const [forgotPasswordSendOtp, { isLoading, isSuccess }] =
+    useForgotPasswordSendOtpMutation();
+  const { handleSubmit, control } = useForm({
+    resolver: zodResolver(forgotPasswordSendOtpSchema),
+    defaultValues: {
+      email: "goniosman715149123@gmail.com",
+    },
+  });
 
-    const onSubmit: SubmitHandler<FormValues> = (data) => {
-      dispatch(SetLoginError(""));
-      login(data);
-    };
-    
+  //otp is sent successfully
+  useEffect(() => {
+    if (!isLoading && isSuccess) {
+      navigate("/verify-otp");
+    }
+  }, [navigate, isSuccess, isLoading]);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      // Handle the email submission logic here
-      console.log('Submitted email:', email);
-    };
-    
+  const onSubmit: SubmitHandler<IFormValues> = (data) => {
+    dispatch(SetForgotError(""));
+    forgotPasswordSendOtp(data);
+  };
+
   return (
     <>
-      {/* Form */}
-      <form onSubmit={handleSubmit} className="text-left">
-          {/* Email Input */}
-          <label className="text-sm font-medium text-gray-700 mb-1 block">Email address</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500 mb-6"
-            required
-          />
-
-          {/* <div className="text-left mb-4">
+      {ForgotError && <Error message={ForgotError} />}
+      <form onSubmit={handleSubmit(onSubmit)} className="text-left">
+        <div className="text-left mb-4">
           <label className="text-sm font-medium text-gray-700 mb-1 block">
             Email address
           </label>
@@ -65,7 +55,7 @@ const ForgotPasswordForm = () => {
             }) => (
               <>
                 <input
-                  type="email"
+                  type="text"
                   onChange={onChange}
                   onBlur={onBlur}
                   value={value}
@@ -82,18 +72,26 @@ const ForgotPasswordForm = () => {
               </>
             )}
           />
-        </div> */}
+        </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition"
-          >
-            Continue
-          </button>
-        </form>
+        {/* Submit Button */}
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full flex items-center justify-center gap-2 bg-black text-white py-2 rounded-md hover:bg-gray-800 transition disabled:bg-gray-800 disabled:cursor-not-allowed"
+        >
+          {isLoading ? (
+            <>
+              <CgSpinnerTwo className="animate-spin" fontSize={16} />
+              Sending...
+            </>
+          ) : (
+            "Send Otp"
+          )}
+        </button>
+      </form>
     </>
-  )
-}
+  );
+};
 
-export default ForgotPasswordForm
+export default ForgotPasswordForm;

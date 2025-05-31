@@ -28,9 +28,10 @@ const LoginForm = () => {
     },
   });
 
+
   const onSubmit: SubmitHandler<TFormValues> = (data) => {
     dispatch(SetLoginError(""));
-    login(data);
+    login(data)
   };
 
   return (
