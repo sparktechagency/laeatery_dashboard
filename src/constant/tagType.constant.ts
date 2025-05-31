@@ -1,6 +1,7 @@
 
 const TagTypes = {
-    users: "Users"
+    users: "Users",
+    me: "Me"
 }
 
 export default TagTypes;

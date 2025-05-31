@@ -1,7 +1,13 @@
 import { useNavigate } from "react-router-dom";
+import { useGetMeQuery } from "../../redux/features/user/userApi";
+import { useAppSelector } from "../../redux/hooks/hooks";
+import UserLoading from "../loader/UserLoading";
+import profile_placeholder from "../../assets/images/profile_placeholder.png";
 
 const Header = () => {
   const navigate = useNavigate();
+  const { isLoading } = useGetMeQuery(undefined);
+  const { user } = useAppSelector((state) => state.user);
   return (
     <>
       <header className="w-full flex justify-end items-center h-[85px] bg-white pr-12">
@@ -22,24 +28,32 @@ const Header = () => {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
               />
             </svg>
           </button>
-          <div
-            onClick={() => navigate("/profile")}
-            className="flex items-center gap-2 cursor-pointer"
-          >
-            <img
-              src="https://i.pravatar.cc/40?img=3"
-              alt="Profile"
-              className="w-9 h-9 rounded-full object-cover"
-            />
-            <span className="text-gray-800 font-medium">Robert Smith</span>
-          </div>
+          {isLoading ? (
+            <UserLoading />
+          ) : (
+            <div
+              onClick={() => navigate("/profile")}
+              className="flex items-center gap-2 cursor-pointer"
+            >
+              <img
+                src={user?.profile_image || profile_placeholder}
+                alt="Profile"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = profile_placeholder;
+                }}
+                className="w-9 h-9 rounded-full object-cover"
+              />
+              <span className="text-gray-800 font-medium">{user?.name}</span>
+            </div>
+          )}
         </div>
       </header>
     </>

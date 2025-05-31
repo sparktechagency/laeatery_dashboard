@@ -1,9 +1,12 @@
-import { Pagination, PaginationProps, Table } from "antd";
+import { Pagination, Table } from "antd";
 import profile_placeholder from "../../assets/images/profile_placeholder.png";
 import ChangeStatusModal from "../modal/auth/ChangeStatusModal";
-import { IUserStatus, TUser } from "../../types/user.type";
+import { TUser, TUserTableRow } from "../../types/user.type";
 import React from "react";
 import { IMeta } from "../../types/global.type";
+
+
+
 
 type TProps = {
   users: TUser[];
@@ -16,7 +19,7 @@ type TProps = {
 
 const UserTable = ({ users, meta, currentPage, setCurrentPage, pageSize, setPageSize }: TProps) => {
 
-   const dataSource = users?.map((user, index)=> ({
+   const dataSource: TUserTableRow[] = users?.map((user, index)=> ({
         key: index,
         serial: Number(index+1) + ((currentPage-1)*pageSize),
         _id: user?._id,
@@ -29,8 +32,7 @@ const UserTable = ({ users, meta, currentPage, setCurrentPage, pageSize, setPage
 
 
 
-
-  const columns = [
+  const columns= [
     {
       title: "SL NO.",
       dataIndex: "serial",
@@ -82,8 +84,7 @@ const UserTable = ({ users, meta, currentPage, setCurrentPage, pageSize, setPage
       title: "Status",
       dataIndex: "is_block",
       key: "is_block",
-      render: (val:boolean, record:TUser) => {
-        console.log(val);
+      render: (val:boolean, record:TUserTableRow) => {
         const statusStyles = {
           blocked: "bg-red-100 text-red-700 border border-red-300",
           active: "bg-green-100 text-green-700 border border-green-300",
@@ -102,34 +103,16 @@ const UserTable = ({ users, meta, currentPage, setCurrentPage, pageSize, setPage
         );
       }
     },
-    // {
-    //   title: "Action",
-    //   key: "action",
-    //   render: (_, record) => (
-    //     <>
-    //       <button className="bg-secondary hover:bg-red-600 p-1.5 text-white rounded-md">
-    //         <MdBlockFlipped size={18} />
-    //       </button>
-    //     </>
-    //   ),
-    // },
   ];
 
 
     
-  const itemRender: PaginationProps["itemRender"] = (
-    _,
-    type,
-    originalElement
-  ) => {
-    if (type === "prev") {
-      return <a>Previous</a>;
-    }
-    if (type === "next") {
-      return <a>Next</a>;
-    }
-    return originalElement;
-  };
+  
+  const handlePagination = (page:number, PageSize:number) => {
+    setCurrentPage(page);
+    setPageSize(PageSize)
+  }
+
 
   return (
     <>
@@ -142,8 +125,8 @@ const UserTable = ({ users, meta, currentPage, setCurrentPage, pageSize, setPage
           className="custom-table"
         />
 
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-center p-4">
-          <Pagination total={20} itemRender={itemRender} />
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex justify-center items-center p-4">
+          <Pagination onChange={handlePagination} current={currentPage} pageSize={pageSize} total={meta?.total} />
         </div>
 
     </>

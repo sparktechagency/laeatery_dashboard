@@ -1,5 +1,4 @@
 
-import { Input } from "antd";
 import { useEffect, useState } from "react";
 import UserTable from "./UserTable";
 import UserGoBack from "./UserGoBack";
@@ -7,7 +6,6 @@ import { FaSearch } from "react-icons/fa";
 import ListLoading from "../loader/ListLoading";
 import { useGetUsersQuery } from "../../redux/features/dashboard/dashboardApi";
 
-const { Search } = Input;
 
 const UserList = () => {
   const [searchQuery, setSearchQuery ] = useState("");
@@ -17,6 +15,7 @@ const UserList = () => {
 
   //debounced handle
   useEffect(() => {
+    // eslint-disable-next-line prefer-const
     let timeoutId;
     clearTimeout(timeoutId); //clear timeout after onChange
     timeoutId = setTimeout(() => {
@@ -34,7 +33,7 @@ const UserList = () => {
   const meta = data?.data?.meta;
     
    
-  const handleSearch = (value) => {
+  const handleSearch = (value:string) => {
     setSearchQuery(value);
   };
 
@@ -58,6 +57,7 @@ const UserList = () => {
               <input
                 type="text"
                 placeholder="Search here..."
+                onChange={(e) => handleSearch(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500"
               />
             </div>
