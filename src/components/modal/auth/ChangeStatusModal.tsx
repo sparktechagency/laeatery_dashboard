@@ -1,97 +1,73 @@
-import { Modal, Form, Select} from "antd";
+import { Modal } from "antd";
 import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { FiEdit } from "react-icons/fi";
-//import { useChangeStatusMutation } from "../../../redux/features/auth/authApi";
-import { ErrorToast } from "../../../helper/ValidationHelper";
+import { useChangeStatusMutation } from "../../../redux/features/auth/authApi";
 
+type TProps ={
+  email:string;
+  status: boolean;
+}
 
-const ChangeStatusModal = ({ userId, status }) => {
+const ChangeStatusModal = ({ email, status }: TProps) => {
   const [modalOpen, setModalOpen] = useState(false);
-  //const [ changeStatus, { isLoading, isSuccess }] = useChangeStatusMutation();
-  const [form] = Form.useForm();
-  const isLoading = false;
+  const [ changeStatus, { isLoading, isSuccess }] = useChangeStatusMutation();
 
 
 
-//   useEffect(() => {
-//     if (isSuccess) {
-//       setModalOpen(false);
-//     }
-//   }, [isSuccess, form]);
+  useEffect(() => {
+    if (isSuccess) {
+      setModalOpen(false);
+    }
+  }, [isSuccess]);
 
 
-  const onFinish = (values) => {
-    // changeStatus({
-    //   id: userId,
-    //   data: {
-    //     status: values.status,
-    //   }
-    // });
-  };
+ const handleClick = () => {
+
+  console.log({
+    email,
+      role: "USER",
+      is_block: status ?  false : true
+  });
+    changeStatus({
+      email,
+      role: "USER",
+      is_block: status ?  false : true
+    })
+ }
 
   return (
     <>
       <button
         className="p-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full"
         onClick={() => {
-            setModalOpen(true);
+          setModalOpen(true);
         }}
       >
         <FiEdit size={14} />
       </button>
       <Modal
-        title={
-          <span className="font-bold text-xl">Update Status</span>
-        }
+        title={`Are you sure, you want to ${status ? "active" : "block"}?`}
         open={modalOpen}
-        onCancel={() => {
-          setModalOpen(false);
-          form.setFieldsValue({ 
-            status
-          });
-        }}
+        onCancel={() => setModalOpen(false)}
         maskClosable={false}
         footer={false}
+        closable={false}
       >
-        <Form
-          form={form}
-          name="edit"
-          layout="vertical"
-          onFinish={onFinish}
-          initialValues={{ status: status }}
-        >
-          <Form.Item
-            name="status"
-            label={
-              <span className="font-semibold">
-                <span className="text-red-500 mr-1">*</span>
-                Status
-              </span>
-            }
-          >
-            <Select
-              style={{ width: "100%" }}
-              options={[
-                { value: "blocked", label: "Blocked" },
-                { value: "unblocked", label: "Unblocked" },
-              ]}
-            />
-          </Form.Item>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="bg-black w-full text-white px-4 py-2 rounded-md hover:bg-gray-800"          >
-            {isLoading ? (
+       
+      
+        <div className="flex justify-end px-4 gap-x-3">
+           <button onClick={()=>setModalOpen(false)} className="bg-black text-white px-4 py-1 rounded-md">No</button>
+           <button onClick={handleClick} disabled={isLoading} className="bg-red-500 hover:bg-red-600 duration-500 text-white px-4 py-1 rounded-md disabled:cursor-not-allowed">
+           {isLoading ? (
               <>
                 <CgSpinnerTwo className="animate-spin" fontSize={16} />
-                Processing...
               </>
             ) : (
-              "Save Change"
+              "Yes"
             )}
-          </button>
-        </Form>
+           </button>
+        </div>
       </Modal>
     </>
   );

@@ -6,7 +6,7 @@ const ResetPasswordPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-200">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md text-center">
+      <div className="bg-white px-4 md:px-8 md:py-8 rounded-2xl shadow-lg w-full max-w-md text-center">
         {/* Logo */}
         <div className="mb-6 flex justify-center">
           <img src={Logo} alt="logo" className="h-12 w-auto object-contain"/>

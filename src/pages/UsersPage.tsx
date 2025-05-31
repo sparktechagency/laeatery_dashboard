@@ -3,12 +3,10 @@ import UserTable from "../components/user/UserTable";
 import { Pagination } from "antd";
 import type { PaginationProps } from "antd";
 import { useNavigate } from "react-router-dom";
+import UserList from "../components/user/UserList";
 
 const UsersPage = () => {
-  const navigate = useNavigate();
-  const handleGoBack = () => {
-    navigate(-1);
-  };
+ 
 
   // getUsers
   const users = [
@@ -104,51 +102,12 @@ const UsersPage = () => {
     },
   ];
 
-  const itemRender: PaginationProps["itemRender"] = (
-    _,
-    type,
-    originalElement
-  ) => {
-    if (type === "prev") {
-      return <a>Previous</a>;
-    }
-    if (type === "next") {
-      return <a>Next</a>;
-    }
-    return originalElement;
-  };
+
 
   return (
     <>
       <section className="bg-white rounded-lg h-full relative">
-        <div className="flex justify-between items-center h-[74px] px-6 py-4 shadow">
-          {/* Left side - Back icon and title */}
-          <div className="flex items-center space-x-4">
-            <button onClick={handleGoBack} className="hover:text-black">
-              <FaArrowLeft size={20} />
-            </button>
-            <h1 className="text-xl font-semibold text-gray-800">
-              User Management
-            </h1>
-          </div>
-
-          {/* Right side - Search bar */}
-          <div className="relative w-72">
-            <span className="absolute inset-y-0 left-3 flex items-center text-gray-700">
-              <FaSearch size={16} />
-            </span>
-            <input
-              type="text"
-              placeholder="Search here..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500"
-            />
-          </div>
-        </div>
-
-        <UserTable users={users} />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-center p-4">
-          <Pagination total={20} itemRender={itemRender} />
-        </div>
+        <UserList/>
       </section>
     </>
   );

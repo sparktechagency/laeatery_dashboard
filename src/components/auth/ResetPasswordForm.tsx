@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -22,12 +22,23 @@ const ResetPasswordForm = () => {
   const dispatch = useDispatch();
   const { ResetPasswordError } = useAppSelector((state) => state.auth);
   const [forgotPasswordReset, { isLoading }] = useForgotPasswordResetMutation();
-  const { handleSubmit, control, watch } = useForm({
+  const { handleSubmit, control, watch, trigger } = useForm({
       resolver: zodResolver(resetPasswordSchema),
       mode: "onChange"
   });
 
    const newPassword = watch('newPassword');
+
+
+    useEffect(() => {
+    if (newPassword) {
+      // Only trigger validation if confirmPassword has been entered
+      const confirmPassword = watch('confirmPassword');
+      if (confirmPassword) {
+        trigger('confirmPassword');
+      }
+    }
+  }, [newPassword, watch, trigger]);
   
   
     const onSubmit: SubmitHandler<TFormValues> = (data) => {

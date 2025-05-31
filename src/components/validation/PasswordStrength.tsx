@@ -1,10 +1,9 @@
-import React from 'react';
 
 interface PasswordStrengthProps {
   password: string;
 }
 
-const PasswordStrength: React.FC<PasswordStrengthProps> = ({ password }) => {
+const PasswordStrength = ({ password }: PasswordStrengthProps) => {
   const getStrength = (password: string): { strength: number; label: string; color: string } => {
     if (!password) return { strength: 0, label: 'None', color: 'bg-gray-200' };
     

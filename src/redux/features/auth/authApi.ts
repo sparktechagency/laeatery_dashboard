@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import TagTypes from "../../../constant/tagType.constant.ts";
 import {
   getEmail,
   setEmail,
-  setOtp,
   setToken,
 } from "../../../helper/SessionHelper.ts";
-import { SuccessToast } from "../../../helper/ValidationHelper.ts";
+import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.ts";
 import { apiSlice } from "../api/apiSlice.ts";
 import {
   SetForgotError,
@@ -77,7 +77,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      async onQueryStarted({ code }, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           await queryFulfilled;
           SuccessToast("Otp is verified successfully");
@@ -122,6 +122,32 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    changeStatus: builder.mutation({
+      query: (data) => ({
+        url: `/auth/block`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: (result) => {
+        if (result?.success) {
+          return [TagTypes.users];
+        }
+        return [];
+      },
+      async onQueryStarted({is_block}, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          SuccessToast(`User is ${is_block ? "blocked" : "activated"} successfully`)
+        } catch (err:any) {
+          const status = err?.error?.status;
+          if (status === 404) {
+            ErrorToast(err?.error?.data?.message);
+          } else {
+            ErrorToast("Something Went Wrong!");
+          }
+        }
+      },
+    }),
   }),
 });
 
@@ -130,4 +156,5 @@ export const {
   useForgotPasswordSendOtpMutation,
   useForgotPasswordVerifyOtpMutation,
   useForgotPasswordResetMutation,
+  useChangeStatusMutation
 } = authApi;

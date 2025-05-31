@@ -1,32 +1,57 @@
-import { Table } from "antd";
-import { IUser } from "../../types/user.type";
-import { MdBlockFlipped } from "react-icons/md";
-import profile_img from "../../assets/images/user1.png";
+import { Pagination, PaginationProps, Table } from "antd";
 import profile_placeholder from "../../assets/images/profile_placeholder.png";
 import ChangeStatusModal from "../modal/auth/ChangeStatusModal";
+import { IUserStatus, TUser } from "../../types/user.type";
+import React from "react";
+import { IMeta } from "../../types/global.type";
 
 type TProps = {
-  users: IUser[];
+  users: TUser[];
+  meta: IMeta,
+  currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+  pageSize: number;
+  setPageSize: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const UserTable = ({ users }: TProps) => {
+const UserTable = ({ users, meta, currentPage, setCurrentPage, pageSize, setPageSize }: TProps) => {
+
+   const dataSource = users?.map((user, index)=> ({
+        key: index,
+        serial: Number(index+1) + ((currentPage-1)*pageSize),
+        _id: user?._id,
+        name: user?.name,
+        email: user?.email,
+        phone_number: user?.phone_number,
+        profile_image: user?.profile_image,
+        is_block: user?.authId?.is_block
+    }))
+
+
+
+
   const columns = [
     {
       title: "SL NO.",
-      dataIndex: "SL No",
-      key: "SL No",
+      dataIndex: "serial",
+      key: "serial",
       render: (val:number)=> (
         <span className="pl-2">{val}</span>
       )
     },
     {
-      title: "Full Name",
-      dataIndex: "fullName",
-      key: "fullName",
-      render: (val, record) => (
+      title: "Name",
+      dataIndex: "name",
+      key: "name"
+    },
+    {
+      title: "Image",
+      dataIndex: "profile_image",
+      key: "profile_image",
+      render: (val?:string) => (
         <div className="flex items-center gap-2">
           <img
-            src={record?.image || profile_img}
+            src={val || profile_placeholder}
             alt="profile"
             className="w-[45px] h-[45px] rounded-lg"
             onError={(e) => {
@@ -34,7 +59,6 @@ const UserTable = ({ users }: TProps) => {
               e.currentTarget.src = profile_placeholder;
             }}
           />
-          <h1>{val}</h1>
         </div>
       ),
     },
@@ -44,35 +68,36 @@ const UserTable = ({ users }: TProps) => {
       key: "email",
     },
     {
-      title: "Mobile Number",
-      dataIndex: "phone",
+      title: "Contact Number",
+      dataIndex: "phone_number",
       key: "phone",
     },
     {
       title: "Address",
       dataIndex: "address",
       key: "address",
+      width: 150
     },
     {
       title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (val, record) => {
+      dataIndex: "is_block",
+      key: "is_block",
+      render: (val:boolean, record:TUser) => {
+        console.log(val);
         const statusStyles = {
           blocked: "bg-red-100 text-red-700 border border-red-300",
-          unblocked: "bg-green-100 text-green-700 border border-green-300",
+          active: "bg-green-100 text-green-700 border border-green-300",
         };
-        const bgColor =
-          val === "blocked" ? statusStyles.blocked : statusStyles.unblocked;
+        const bgColor = val ? statusStyles.blocked : statusStyles.active;
     
         return (
           <div className="flex items-center gap-2">
             <span
-              className={`${bgColor} px-3 py-0.5 text-sm font-medium rounded-full`}
+              className={`${bgColor} w-20 text-center px-3 py-0.5 text-sm font-medium rounded-full`}
             >
-              {val}
+              {val ? "blocked" : "active"}
             </span>
-            <ChangeStatusModal userId={record._id} status={val}/>
+            <ChangeStatusModal email={record.email} status={val}/>
           </div>
         );
       }
@@ -91,16 +116,35 @@ const UserTable = ({ users }: TProps) => {
   ];
 
 
+    
+  const itemRender: PaginationProps["itemRender"] = (
+    _,
+    type,
+    originalElement
+  ) => {
+    if (type === "prev") {
+      return <a>Previous</a>;
+    }
+    if (type === "next") {
+      return <a>Next</a>;
+    }
+    return originalElement;
+  };
+
   return (
     <>
         <Table
           size="small"
           columns={columns}
-          dataSource={users}
+          dataSource={dataSource}
           pagination={false}
           scroll={{ x: true, y: "55vh" }}
           className="custom-table"
         />
+
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-center p-4">
+          <Pagination total={20} itemRender={itemRender} />
+        </div>
 
     </>
   );
