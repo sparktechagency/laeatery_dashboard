@@ -2,6 +2,7 @@
 import {apiSlice} from "../api/apiSlice.js";
 import {ErrorToast, SuccessToast} from "../../../helper/ValidationHelper.js";
 import TagTypes from "../../../constant/tagType.constant.js";
+import { SetCreateFaqError, SetEditFaqError } from "./faqSlice.js";
 
 export const faqApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -25,17 +26,13 @@ export const faqApi = apiSlice.injectEndpoints({
         }
         return []
       },
-      async onQueryStarted(_arg, { queryFulfilled }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           await queryFulfilled;
           SuccessToast("Faq is created successfully");
         } catch (err:any) {
-          const status = err?.error?.status;
-          if (status === 409) {
-            ErrorToast(err?.error?.data?.message);
-          } else {
-            ErrorToast("Something Went Wrong!");
-          }
+           const message = err?.error?.data?.message;
+           dispatch(SetCreateFaqError(message))
         }
       },
     }),
@@ -55,12 +52,8 @@ export const faqApi = apiSlice.injectEndpoints({
           await queryFulfilled;
           SuccessToast("Faq is deleted successfully");
         } catch (err:any) {
-          const status = err?.error?.status;
-          if (status === 404) {
-            ErrorToast(err?.error?.data?.message);
-          } else {
-            ErrorToast("Something Went Wrong!");
-          }
+           const message = err?.error?.data?.message;
+           ErrorToast(message)
         }
       },
     }),
@@ -76,19 +69,13 @@ export const faqApi = apiSlice.injectEndpoints({
         }
         return []
       },
-      async onQueryStarted(_arg, { queryFulfilled }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           await queryFulfilled;
             SuccessToast("Faq is updated successfully");
         } catch (err:any) {
-          const status = err?.error?.status;
-          if (status === 404) {
-            ErrorToast(err?.error?.data?.message);
-          } else if (status === 409) {
-            ErrorToast(err?.error?.data?.message);
-          } else {
-            ErrorToast("Something Went Wrong!");
-          }
+           const message = err?.error?.data?.message;
+           dispatch(SetEditFaqError(message))
         }
       },
     }),

@@ -1,7 +1,8 @@
 import { Modal } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { FiTrash2 } from "react-icons/fi";
+import { useDeleteFaqMutation } from "../../../redux/features/faq/faqApi";
 
 
 type TProps = {
@@ -11,17 +12,16 @@ type TProps = {
 
 const DeleteFaqModal = ({ faqId }: TProps) => {
    const [ modalOpen, setModalOpen ] = useState(false);
-   //const [ deleteRestaurant, { isLoading, isSuccess, isError }] = useDeleteRestaurantMutation();
-   const isLoading=false;
+   const [ deleteFaq, { isLoading, isSuccess, isError }] = useDeleteFaqMutation();
 
-    // useEffect(()=> {
-    //     if(isSuccess || isError){
-    //       setModalOpen(false)
-    //     }
-    // },[isSuccess, isError])
+    useEffect(()=> {
+        if(isSuccess || isError){
+          setModalOpen(false)
+        }
+    },[isSuccess, isError])
    
     const handleDelete = () => {
-        //deleteRestaurant(restaurantId);
+        deleteFaq(faqId);
     }
 
   return (
