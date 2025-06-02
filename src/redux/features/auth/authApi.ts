@@ -8,6 +8,7 @@ import {
 import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.ts";
 import { apiSlice } from "../api/apiSlice.ts";
 import {
+  SetChangePasswordError,
   SetForgotError,
   SetLoginError,
   SetResetPasswordError,
@@ -148,6 +149,30 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: "/auth/change-password",
+        method: "PATCH",
+        body: data,
+      }),
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
+        try {
+          await queryFulfilled;
+          SuccessToast("Password is updated successfully");
+          setTimeout(() => {
+            localStorage.clear()
+            window.location.href = "/login";
+          }, 300);
+        } catch (err:any) {
+          const message = err?.error?.data?.message;
+          if(message === "password is incorrect"){
+            dispatch(SetChangePasswordError("Wrong Current Password"))
+          }else{
+            dispatch(SetChangePasswordError(message))
+          }
+        }
+      },
+    }),
   }),
 });
 
@@ -156,5 +181,6 @@ export const {
   useForgotPasswordSendOtpMutation,
   useForgotPasswordVerifyOtpMutation,
   useForgotPasswordResetMutation,
-  useChangeStatusMutation
+  useChangeStatusMutation,
+  useChangePasswordMutation
 } = authApi;

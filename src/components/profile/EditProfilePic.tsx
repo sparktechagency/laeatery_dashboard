@@ -1,6 +1,7 @@
 import { FaCamera } from "react-icons/fa";
 import profile_placeholder_img from "../../assets/images/profile_placeholder.png";
 import { useRef, useState } from "react";
+import { useAppSelector } from "../../redux/hooks/hooks";
 
 type TProps = {
   setFile: React.Dispatch<React.SetStateAction<null | File>>;
@@ -8,7 +9,8 @@ type TProps = {
 };
 
 const EditProfilePic = ({ setFile, isProfile }: TProps) => {
-  const [imageSrc, setImageSrc] = useState(profile_placeholder_img); // Default image
+  const { user } = useAppSelector((state) => state.user);
+  const [imageSrc, setImageSrc] = useState("http://10.0.60.118:5003"+user?.profile_image ||profile_placeholder_img); // Default image
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

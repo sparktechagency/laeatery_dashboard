@@ -4,7 +4,7 @@
 import {apiSlice} from "../api/apiSlice.js";
 import TagTypes from "../../../constant/tagType.constant.js";
 import { SetUser } from "./userSllice.js";
-import { ErrorToast } from "../../../helper/ValidationHelper.js";
+import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.js";
 
 export const userApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -25,8 +25,34 @@ export const userApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        url: `/auth/admin/edit-profile`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: (result) => {
+        if (result?.success) {
+          return [TagTypes.me];
+        }
+        return [];
+      },
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
+        try {
+          await queryFulfilled;
+          SuccessToast("Profile is updated successfully");
+        } catch (err:any) {
+          const status = err?.error?.status;
+          if (status === 404) {
+            ErrorToast(err?.error?.data?.message);
+          }else {
+            ErrorToast("Something Went Wrong!");
+          }
+        }
+      },
+    }),
   }),
 });
 
 
-export const { useGetMeQuery } = userApi;
+export const { useGetMeQuery, useUpdateProfileMutation } = userApi;

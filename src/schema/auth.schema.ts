@@ -46,3 +46,37 @@ export const resetPasswordSchema = z.object({
       });
     }
   });
+
+
+  
+
+export const changePasswordSchema = z
+  .object({
+    oldPassword: z
+      .string({ required_error: "Old Password is required" })
+      .trim()
+      .min(1, "Old Password is required")
+      .min(6, "Old Password must be at least 6 characters long")
+      .max(100, "Old Password is too long"),
+    newPassword: z
+      .string({ required_error: "New Password is required" })
+      .trim()
+      .min(1, "New Password is required")
+      .min(6, "New Password must be at least 6 characters long")
+      .max(100, "New Password is too long"),  
+    confirmPassword: z
+      .string({ required_error: "Confirm Password is required" })
+      .trim()
+      .min(1, "Confirm Password is required")
+      .min(6, "Confirm Password must be at least 6 characters long")
+      .max(100, "Confirm Password is too long")
+  })
+  .superRefine((data, ctx) => {
+    if (data.newPassword !== data.confirmPassword) {
+      ctx.addIssue({
+        path: ["confirmPassword"],
+        message: "Passwords do not match",
+        code: z.ZodIssueCode.custom,
+      });
+    }
+  });

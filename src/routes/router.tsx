@@ -2,9 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardPage from "../pages/DashboardPage";
 import DashboardLayout from "../components/layout/DashboardLayout";
 import UsersPage from "../pages/UsersPage";
-import RestaurantsPage from "../pages/RestaurantsPage";
-import VibePage from "../pages/VibePage";
-import CusinePage from "../pages/CusinePage";
 import HelpPage from "../pages/HelpPage";
 import FaqsPage from "../pages/FaqsPage";
 import TermsPage from "../pages/TermsPage";
@@ -15,9 +12,9 @@ import ResetPasswordPage from "../pages/auth/ResetPasswordPage";
 import VerifyOtpPage from "../pages/auth/VerifyOtpPage";
 import LoginPage from "../pages/auth/LoginPage";
 import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
-import NotificationsPage from "../pages/NotificationsPage";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
+import NotFoundPage from "../pages/NotFound/NotFoundPage";
 
 const router = createBrowserRouter([
   {
@@ -32,19 +29,6 @@ const router = createBrowserRouter([
       {
         path: "users",
         element: <UsersPage />,
-      },
-      {
-        path: "restaurants",
-        element: <RestaurantsPage />,
-        // loader: teamLoader,
-      },
-      {
-        path: "vibe",
-        element: <VibePage />,
-      },
-      {
-        path: "cuisine",
-        element: <CusinePage />,
       },
       {
         path: "help",
@@ -67,10 +51,6 @@ const router = createBrowserRouter([
         element: <PrivacyPolicyPage />,
       },
       {
-        path: "notifications",
-        element: <NotificationsPage />,
-      },
-      {
         path: "about",
         element: <AboutPage />,
       },
@@ -91,6 +71,10 @@ const router = createBrowserRouter([
   {
     path: "/reset-password",
     element: <PublicRoute><ResetPasswordPage/></PublicRoute>
+  },
+  {
+    path: "/*",
+    element: <NotFoundPage/>
   }
 ]);
 
