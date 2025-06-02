@@ -5,7 +5,7 @@ import { FiTrash2 } from "react-icons/fi";
 
 
 type TProps = {
-  restaurantId : string
+  faqId : string
 }
 
 

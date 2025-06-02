@@ -1,9 +1,14 @@
+import { IFaq } from "../../types/faq.type";
 import DeleteFaqModal from "../modal/faq/DeleteFaqModal";
 import EditFaqModal from "../modal/faq/EditFaqModal";
 
+type TProps = {
+  faq: IFaq,
+  index: number
+}
 
 
-const FaqItem = ({ faq, index}) => {
+const FaqItem = ({ faq, index}: TProps) => {
   return (
     <>
       <div
@@ -14,7 +19,7 @@ const FaqItem = ({ faq, index}) => {
                 <p className="text-sm text-gray-500 mb-1">
                   Question no: {index + 1}
                 </p>
-                <h3 className="font-semibold text-gray-800">{faq.question}</h3>
+                <h3 className="font-semibold text-gray-800">{faq?.questions}</h3>
               </div>
               <div className="flex gap-x-1.5">
                 <EditFaqModal/>

@@ -1,8 +1,13 @@
 import { Modal } from "antd";
 import { useState } from "react";
 import { FiEdit } from "react-icons/fi";
+import { IFaq } from "../../../types/faq.type";
 
-const EditFaqModal = () => {
+type TProps = {
+  faq: IFaq
+}
+
+const EditFaqModal = ({faq}: TProps) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (

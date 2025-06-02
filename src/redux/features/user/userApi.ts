@@ -5,6 +5,7 @@ import {apiSlice} from "../api/apiSlice.js";
 import TagTypes from "../../../constant/tagType.constant.js";
 import { SetUser } from "./userSllice.js";
 import { ErrorToast, SuccessToast } from "../../../helper/ValidationHelper.js";
+import { SetProfileError } from "../auth/authSlice.js";
 
 export const userApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -42,12 +43,8 @@ export const userApi = apiSlice.injectEndpoints({
           await queryFulfilled;
           SuccessToast("Profile is updated successfully");
         } catch (err:any) {
-          const status = err?.error?.status;
-          if (status === 404) {
-            ErrorToast(err?.error?.data?.message);
-          }else {
-            ErrorToast("Something Went Wrong!");
-          }
+          const message = err?.error?.data?.message;
+          dispatch(SetProfileError(message))
         }
       },
     }),
