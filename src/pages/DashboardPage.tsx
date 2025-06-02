@@ -1,4 +1,3 @@
-import TopRestaurantTable from "../components/dashboard/TopRestaurantTable";
 import BookingOverviewChart from "../components/summary/BookingOverviewChart";
 import Summary from "../components/summary/Summary";
 import UserGrowthChart from "../components/summary/UserGrowthChart";
@@ -12,9 +11,6 @@ const DashboardPage = () => {
           <UserGrowthChart/>
           <BookingOverviewChart/>
         </div>
-         <div className="mt-4">
-          <TopRestaurantTable/>
-         </div>
       </div>
     </>
   );

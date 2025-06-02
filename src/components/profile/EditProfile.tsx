@@ -77,7 +77,7 @@ const EditProfile = ({ file }: TProps) => {
           <label className="block text-gray-700">Email</label>
           <input
             type="email"
-            className="w-full p-2 border rounded-md outline-none focus:border-blue-500 disabled:bg-gray-100"
+            className="w-full p-2 border rounded-md outline-none focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
             defaultValue={user?.email}
             disabled
           />
