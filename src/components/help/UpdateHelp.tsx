@@ -2,7 +2,7 @@ import JoditEditor from "jodit-react";
 import { useRef, useState } from "react";
 import { ErrorToast } from "../../helper/ValidationHelper";
 import { CgSpinnerTwo } from "react-icons/cg";
-import { useCreateUpdatePrivacyPolicyMutation } from "../../redux/features/policy/policyApi";
+import { useCreateUpdateHelpMutation } from "../../redux/features/help/helpApi";
 
 type TProps = {
   description: string;
@@ -11,14 +11,14 @@ type TProps = {
 const UpdateHelp = ({ description: initialDescription }: TProps) => {
   const [description, setDescription] = useState(initialDescription);
   const editor = useRef(null);
-  const [createUpdatePrivacy, { isLoading }] =
-    useCreateUpdatePrivacyPolicyMutation();
+  const [createUpdateHelp, { isLoading }] =
+    useCreateUpdateHelpMutation();
 
   const handleSubmit = async () => {
     if (!description) {
       ErrorToast("description is required");
     } else {
-      createUpdatePrivacy({
+      createUpdateHelp({
         message: "updated",
         data: {
           description,

@@ -1,25 +1,26 @@
 import CreateHelp from "../components/help/CreateHelp";
 import UpdateHelp from "../components/help/UpdateHelp";
 import EditorLoading from "../components/loader/EditorLoading";
-import { useGetPrivacyPolicyQuery } from "../redux/features/policy/policyApi";
+import { useGetHelpQuery } from "../redux/features/help/helpApi";
 
 
-const PrivacyPolicyPage = () => {
- const { data, isLoading, isSuccess, error} = useGetPrivacyPolicyQuery(undefined);
- const privacy = data?.data;
+const HelpPage = () => {
+ const { data, isLoading, isSuccess, error} = useGetHelpQuery(undefined);
+ const help = data?.data;
+ console.log(help);
 
 
  if(isLoading){
   return <EditorLoading/>
  }
- if(!isLoading && error && !privacy?._id){
+ if(!isLoading && error && !help?._id){
   return <CreateHelp/>
  }
  
- if(!isLoading && isSuccess && privacy?._id){
-   return <UpdateHelp description={privacy?.description}/>
+ if(!isLoading && isSuccess && help?._id){
+   return <UpdateHelp description={help?.description}/>
  }
  
 };
 
-export default PrivacyPolicyPage;
+export default HelpPage;

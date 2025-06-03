@@ -21,9 +21,9 @@ const ForgotPasswordForm = () => {
     useForgotPasswordSendOtpMutation();
   const { handleSubmit, control } = useForm({
     resolver: zodResolver(forgotPasswordSendOtpSchema),
-    defaultValues: {
-      email: "goniosman715149123@gmail.com",
-    },
+    // defaultValues: {
+    //   email: "goniosman715149123@gmail.com",
+    // },
   });
 
   //otp is sent successfully

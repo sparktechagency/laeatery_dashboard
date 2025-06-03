@@ -22,10 +22,10 @@ const LoginForm = () => {
   const [login, { isLoading }] = useLoginMutation();
   const { handleSubmit, control } = useForm({
     resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: "goniosman715149123@gmail.com",
-      password: "1qaz2wwss",
-    },
+    // defaultValues: {
+    //   email: "goniosman715149123@gmail.com",
+    //   password: "1qaz2wwss",
+    // },
   });
 
 
