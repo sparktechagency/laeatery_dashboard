@@ -1,9 +1,10 @@
 import { Pagination, PaginationProps } from "antd";
 import NotificationListItem from "./NotificationListItem";
+import { TNotification } from "../../types/notification.type";
 
 
 
-const notifications = [
+const notifications: TNotification[] = [
     {
       title: "New Order Received",
       message:

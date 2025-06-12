@@ -30,6 +30,7 @@ const UserList = () => {
   ]);
 
   const users = data?.data?.result || [];
+  console.log(users)
   const meta = data?.data?.meta;
     
    

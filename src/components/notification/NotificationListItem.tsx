@@ -1,6 +1,12 @@
-import { FaTrashAlt } from "react-icons/fa"
+import { FaTrashAlt } from "react-icons/fa";
+import { TNotification } from "../../types/notification.type";
 
-const NotificationListItem = ({item, index}) => {
+type TProps = {
+  item: TNotification,
+  index: number
+}
+
+const NotificationListItem = ({item, index}: TProps) => {
   return (
     <>
       <div

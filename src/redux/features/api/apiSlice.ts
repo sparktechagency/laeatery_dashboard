@@ -5,7 +5,8 @@ import { getToken } from "../../../helper/SessionHelper.js";
 import TagTypes from "../../../constant/tagType.constant.js";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://10.0.60.118:5003",
+  //baseUrl: "http://10.0.60.118:5003",
+  baseUrl: "https://backend.laeatery.com",
   prepareHeaders: async (headers) => {
     if (getToken()) {
       headers.set("Authorization", `Bearer ${getToken() as string}`);

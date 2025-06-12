@@ -38,7 +38,7 @@ const MenuItem = ({ item } : {item:any}) => {
       {/* Submenu Items */}
       {open && children && (
         <div className="ml-8 mt-1 flex flex-col gap-1">
-          {children.map((child, index) => (
+          {children.map((child:any, index:number) => (
             <div
               key={index}
               onClick={() => navigate(child.path)}

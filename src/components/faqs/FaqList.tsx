@@ -1,6 +1,7 @@
 import { useGetFaqsQuery } from "../../redux/features/faq/faqApi";
 import { IFaq } from "../../types/faq.type";
 import FaqNotFoundCard from "../card/FaqNotFoundCard";
+import ServerErrorCard from "../card/ServerErrorCard";
 import FaqLoading from "../loader/FaqLoading";
 import CreateFaqModal from "../modal/faq/CreateFaqModal";
 import FaqItem from "./FaqItem";
@@ -28,6 +29,10 @@ const FaqList = () => {
     )
   }
 
+   if(!isLoading && isError){
+    return <ServerErrorCard/>
+  }
+
   if(!isLoading && faqs.length === 0){
     return (
       <>   
@@ -40,9 +45,7 @@ const FaqList = () => {
   }
 
 
-  if(!isLoading && isError){
-    return <h1>Something Went Wrong</h1>
-  }
+ 
 
 
 }
