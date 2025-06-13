@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { useNavigate } from "react-router-dom";
-import { useForgotPasswordVerifyOtpMutation } from "../../redux/features/auth/authApi";
+import { useForgotPasswordSendOtpMutation, useForgotPasswordVerifyOtpMutation } from "../../redux/features/auth/authApi";
 import Error from "../validation/Error";
 import { getEmail } from "../../helper/SessionHelper";
 import { SetVerifyOtpError } from "../../redux/features/auth/authSlice";
@@ -15,6 +15,8 @@ const VerifyOtpForm = () => {
   const { VerifyOtpError } = useAppSelector((state) => state.auth);
   const [forgotPasswordVerifyotp, { isLoading, isSuccess }] =
     useForgotPasswordVerifyOtpMutation();
+  const [forgotPasswordSendOtp, { isLoading:resendLoading }] =
+        useForgotPasswordSendOtpMutation();
   const isDisabled = code.find((cv) => cv == "") == ""; //check if any code is empty string
 
   const handleChange = (element: HTMLInputElement, index: number) => {
@@ -70,6 +72,13 @@ const VerifyOtpForm = () => {
     });
   };
 
+
+  const handleResend = () => {
+    forgotPasswordSendOtp({
+      email: getEmail()
+    })
+  }
+
   return (
     <>
       {/* Code Inputs */}
@@ -110,8 +119,10 @@ const VerifyOtpForm = () => {
       {/* Resend */}
       <p className="text-sm text-gray-500">
         You have not received the email?{" "}
-        <button className="text-blue-500 font-medium hover:underline">
-          Resend
+        <button onClick={handleResend} disabled={resendLoading} className="text-blue-500 font-medium hover:underline disabled:cursor-not-allowed">
+          {
+            resendLoading ? "Sending..." : "Resend"
+          }
         </button>
       </p>
     </>

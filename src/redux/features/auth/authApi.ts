@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { jwtDecode, JwtPayload } from "jwt-decode";
 import TagTypes from "../../../constant/tagType.constant.ts";
 import {
   getEmail,
@@ -27,7 +28,8 @@ export const authApi = apiSlice.injectEndpoints({
         try {
           const res = await queryFulfilled;
           const token = res?.data?.data?.accessToken;
-          const role = res?.data?.data?.user?.authId?.role;
+          const authUser = jwtDecode(token) as JwtPayload & {role: string};
+          const role = authUser?.role;
           if (role === "ADMIN" || role === "SUPER_ADMIN") {
             setToken(token);
             SuccessToast("Login Success");
