@@ -3,6 +3,7 @@ import { useGetMeQuery } from "../../redux/features/user/userApi";
 import { useAppSelector } from "../../redux/hooks/hooks";
 import UserLoading from "../loader/UserLoading";
 import profile_placeholder from "../../assets/images/profile_placeholder.png";
+import { baseUrl } from "../../redux/features/api/apiSlice";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Header = () => {
               className="flex items-center gap-2 cursor-pointer"
             >
               <img
-                src={"https://backend.laeatery.com"+user?.profile_image || profile_placeholder}
+                src={user?.profile_image === null ? profile_placeholder : baseUrl+user?.profile_image}
                 alt="Profile"
                 onError={(e) => {
                   e.currentTarget.onerror = null;

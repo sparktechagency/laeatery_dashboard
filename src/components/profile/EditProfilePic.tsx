@@ -1,7 +1,8 @@
 import { FaCamera } from "react-icons/fa";
-import profile_placeholder_img from "../../assets/images/profile_placeholder.png";
+import profile_placeholder from "../../assets/images/profile_placeholder.png";
 import { useRef, useState } from "react";
 import { useAppSelector } from "../../redux/hooks/hooks";
+import { baseUrl } from "../../redux/features/api/apiSlice";
 
 type TProps = {
   setFile: React.Dispatch<React.SetStateAction<null | File>>;
@@ -10,7 +11,7 @@ type TProps = {
 
 const EditProfilePic = ({ setFile, isProfile }: TProps) => {
   const { user } = useAppSelector((state) => state.user);
-  const [imageSrc, setImageSrc] = useState("https://backend.laeatery.com"+user?.profile_image ||profile_placeholder_img); // Default image
+  const [imageSrc, setImageSrc] = useState(user?.profile_image === null ? profile_placeholder : baseUrl+user?.profile_image); // Default image
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +44,7 @@ const EditProfilePic = ({ setFile, isProfile }: TProps) => {
         <img
           src={imageSrc}
           alt="Profile"
-          onError={() => setImageSrc(profile_placeholder_img)}
+          onError={() => setImageSrc(profile_placeholder)}
           className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md"
         />
         {isProfile && (
