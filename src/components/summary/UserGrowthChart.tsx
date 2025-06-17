@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from 'react';
 import {
   BarChart,
   Bar,
@@ -8,58 +9,46 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import { TUserYear } from '../../types/year.type';
+
+import { useGetUserGrowthQuery } from '../../redux/features/dashboard/dashboardApi';
+import UserGrowthLoading from '../loader/UserGrowthLoading';
 
 
 
-const barDataByYear: Record<string, TUserYear[]> = {
-  // "2023": [
-  //   { month: 'Jan', users: 300 },
-  //   { month: 'Feb', users: 250 },
-  //   { month: 'Mar', users: 400 },
-  //   { month: 'Apr', users: 350 },
-  //   { month: 'May', users: 500 },
-  //   { month: 'Jun', users: 480 },
-  //   { month: 'Jul', users: 520 },
-  //   { month: 'Aug', users: 600 },
-  //   { month: 'Sep', users: 450 },
-  //   { month: 'Oct', users: 700 },
-  //   { month: 'Nov', users: 620 },
-  //   { month: 'Dec', users: 750 },
-  // ],
-  // "2024": [
-  //   { month: 'Jan', users: 400 },
-  //   { month: 'Feb', users: 380 },
-  //   { month: 'Mar', users: 420 },
-  //   { month: 'Apr', users: 460 },
-  //   { month: 'May', users: 500 },
-  //   { month: 'Jun', users: 600 },
-  //   { month: 'Jul', users: 650 },
-  //   { month: 'Aug', users: 680 },
-  //   { month: 'Sep', users: 700 },
-  //   { month: 'Oct', users: 740 },
-  //   { month: 'Nov', users: 800 },
-  //   { month: 'Dec', users: 850 },
-  // ],
-  "2025": [
-    { month: 'Jan', users: 450 },
-    { month: 'Feb', users: 480 },
-    { month: 'Mar', users: 500 },
-    { month: 'Apr', users: 900 },
-    { month: 'May', users: 650 },
-    { month: 'Jun', users: 700 },
-    { month: 'Jul', users: 350 },
-    { month: 'Aug', users: 800 },
-    { month: 'Sep', users: 420 },
-    { month: 'Oct', users: 670 },
-    { month: 'Nov', users: 900 },
-    { month: 'Dec', users: 950 },
-  ],
-};
+
+const yearOptions = [
+  "2025",
+  "2026",
+  "2027",
+  "2028",
+  "2029",
+  "2030"
+]
 
 const UserGrowthChart = () => {
-  const [selectedYear, setSelectedYear] = useState('2025');
-  const barData = barDataByYear[selectedYear];
+  const date = new Date();
+  const currentYear = date.getFullYear().toString();
+  const [selectedYear, setSelectedYear] = useState(currentYear);
+  const [barData, setBarData] = useState([])
+  const {data, isLoading} = useGetUserGrowthQuery(selectedYear);
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      const result = data?.data?.data;
+      const formatted = result?.map((item:any) => ({
+        month: item.month,
+        users: item.count,
+      }));
+      setBarData(formatted)
+    }
+  }, [data, isLoading]);
+
+
+  if(isLoading){
+    return <UserGrowthLoading/>
+  }
+
+
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-sm">
@@ -70,11 +59,12 @@ const UserGrowthChart = () => {
           value={selectedYear}
           onChange={(e) => setSelectedYear(e.target.value)}
         >
-          {Object.keys(barDataByYear).map((year) => (
+          {yearOptions.map((year) => (
             <option key={year} value={year}>
               {year}
             </option>
           ))}
+
         </select>
       </div>
 

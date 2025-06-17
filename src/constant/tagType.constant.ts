@@ -7,7 +7,8 @@ const TagTypes = {
     privacyPolicy: "PrivacyPolicy",
     aboutUs: "AboutUs",
     help: "Help",
-    total: "Total"
+    total: "Total",
+    userGrowth: "UserGrowth"
 }
 
 export default TagTypes;

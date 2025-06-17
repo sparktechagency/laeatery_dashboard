@@ -34,7 +34,17 @@ export const dashboardApi = apiSlice.injectEndpoints({
       keepUnusedDataFor: 600,
       providesTags: [TagTypes.total],
     }),
+    getUserGrowth: builder.query({
+      query: (year) => {
+        return {
+          url: `/dashboard/get_user_growth?year=${year}`,
+          method: "GET",
+        };
+      },
+      keepUnusedDataFor: 600,
+      providesTags: [TagTypes.userGrowth],
+    }),
   }),
 });
 
-export const { useGetUsersQuery, useGetTotalQuery } = dashboardApi;
+export const { useGetUsersQuery, useGetTotalQuery, useGetUserGrowthQuery } = dashboardApi;
